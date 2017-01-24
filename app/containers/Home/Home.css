@@ -1,0 +1,23 @@
+.header {
+  font-weight: 800;
+  font-family: monospace !important;
+  color: #9D9D9D;
+  text-align: center;
+  font-size: 90px;
+  margin-bottom: 0;
+} 
+.subheader {
+  font-weight: 800;
+  font-family: monospace !important;
+  color: #9D9D9D;
+  text-align: center;
+  font-size: 60px;
+  margin-bottom: 0;
+} 
+.text {
+  font-size: 24px;
+  color: #4d4d4d;
+  text-transform: lowercase;
+  font-family: monospace;
+  text-align: center;
+}

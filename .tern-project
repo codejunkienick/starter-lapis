@@ -1,0 +1,25 @@
+{
+  "ecmaVersion": 7,
+  "libs": [
+    "browser",
+  ],
+  "loadEagerly": [
+    "app/**/*.js"
+  ],
+  "dontLoad": [
+    "app/assets/**/*.js"
+  ],
+  "plugins": {
+    "complete_strings": {
+      "maxLength": 15
+    },
+    "node": {},
+    "webpack": {
+      "configPath": "webpack/dev.config.js"
+    },
+    "doc_comment": {
+      "fullDocs": true,
+      "strong": true
+    }
+  }
+}

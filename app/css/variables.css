@@ -1,0 +1,34 @@
+:root {
+  --gutter-width: 1rem;
+  --outer-margin: 2rem;
+  --gutter-compensation: calc((var(--gutter-width) * 0.5) * -1);
+  --half-gutter-width: calc((var(--gutter-width) * 0.5));
+  --xs-min: 30;
+  --sm-min: 48;
+  --md-min: 64;
+  --lg-min: 75;
+  --xlg-min: 110;
+  --screen-xs-min: var(--xs-min)em;
+  --screen-sm-min: var(--sm-min)em;
+  --screen-md-min: var(--md-min)em;
+  --screen-lg-min: var(--lg-min)em;
+  --container-sm: calc(var(--sm-min) + var(--gutter-width));
+  --container-md: calc(var(--md-min) + var(--gutter-width));
+  --container-lg: calc(var(--lg-min) + var(--gutter-width));
+  --body-font-family: Verdana, sans-serif;
+  --body-font-family-loaded: 'Roboto', Verdana, sans-serif;
+  --link-color: #211b82;
+  --link-hover-color: #392db3;
+  --primary-color: #362d90;
+  --alert-color: #bb0000;
+  --grey-color: rgba(229, 229, 229, 1);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --table-color: #f8f2d8;
+  --easing-swift-in: cubic-bezier(0,0,0.2,1);
+  --easing-swift-out: cubic-bezier(0.4,0,1,1);
+}
+
+@custom-media --sm-viewport only screen and (min-width: 48em);
+@custom-media --md-viewport only screen and (min-width: 1000px);
+@custom-media --lg-viewport only screen and (min-width: 75em);
+@custom-media --xlg-viewport only screen and (min-width: 110em);

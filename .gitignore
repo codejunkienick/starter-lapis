@@ -1,0 +1,16 @@
+.idea/
+node_modules/
+*.iml
+*.log
+webpack-assets.json
+webpack-stats.json
+npm-debug.log
+wordpress/
+tmp/
+static/uploads/
+static/dist/
+webpack/hard-source-cache/
+tags
+.ctags
+.tern-port/
+/nbproject/private/

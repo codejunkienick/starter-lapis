@@ -1,0 +1,49 @@
+// @flow-weak
+import { createStore as _createStore, applyMiddleware, compose } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
+import Immutable from 'immutable';
+import createSagaMiddleware from 'redux-saga';
+// import Reactotron from 'reactotron-react-js'
+// import createReactotronEnhancer from 'reactotron-redux'
+import rootSaga from './sagas';
+
+export default function createStore(history: Object, data: Object = {}) {
+  // Sync dispatched route actions to the history
+  const reduxRouterMiddleware = routerMiddleware(history);
+  const sagaMiddleware = createSagaMiddleware();
+
+  const middleware = [ reduxRouterMiddleware, sagaMiddleware ];
+
+  let finalCreateStore;
+  if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
+    // const reactotronEnhancer = createReactotronEnhancer(Reactotron)
+    const { persistState } = require('redux-devtools');
+    const DevTools = require('../containers/DevTools/DevTools');
+    finalCreateStore = compose(
+      // reactotronEnhancer,
+      applyMiddleware(...middleware),
+      window.devToolsExtension
+        ? window.devToolsExtension()
+        : DevTools.instrument(),
+      persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
+    )(_createStore);
+  } else {
+    finalCreateStore = applyMiddleware(...middleware)(_createStore);
+  }
+
+  const reducer = require('./reducers/index');
+  const store = finalCreateStore(reducer, Immutable.fromJS(data));
+
+  // Object.values(sagas).forEach(saga => sagaMiddleware.run(user));
+  sagaMiddleware.run(rootSaga).done.catch(
+    err => console.log('[SAGA-ERROR]', err),
+  );
+
+  if (__DEVELOPMENT__ && module.hot) {
+    module.hot.accept('./reducers/index', () => {
+      store.replaceReducer(require('./reducers/index'));
+    });
+  }
+
+  return store;
+}

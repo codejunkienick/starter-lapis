@@ -1,0 +1,197 @@
+/**
+ * GLOBAL STYLES TO WHOLE APPLICATION.
+ *
+ */
+@import 'normalize.css';
+@import 'variables';
+@import url(https://fonts.googleapis.com/css?family=Roboto:400&subset=latin,cyrillic);
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(253, 253, 253);
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--body-font-family);
+  color: #000;
+  height: 100%;
+
+  :global &.fonts-loaded {
+    font-family: var(--body-font-family-loaded);
+    & textarea, input, select, button {
+      font-family: var(--body-font-family-loaded);
+    }
+  }
+}
+
+form {
+  &:focus {
+    outline: none;
+  }
+}
+
+textarea {
+  line-height: 1.57;
+} 
+
+input {
+  line-height: 1;
+}
+
+input, textarea, select, button {
+  font-family: var(--body-font-family);
+  :global &.fonts-loaded {
+    font-family: var(--body-font-family-loaded);
+    font-weight: 400;
+  }
+
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: inherit;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 36px;
+  letter-spacing: -0.5px;
+}
+h3 {
+  margin-top: 0;
+  margin-bottom: 28px;
+  font-size: 24px;
+  letter-spacing: -0.5px;
+}
+p { 
+  margin-top: 0;
+  margin-bottom: 14px;
+  line-height: 1.57;
+}
+
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  &:hover {
+    color: var(--link-hover-color);
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  margin-top: 0.7em;
+  margin-bottom: 1.414em;
+}
+ul li,
+ol li {
+  line-height: 1.57;
+  margin-bottom: 14px;
+}
+ul ul,
+ol ul,
+ul ol,
+ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* Code blocks */
+code {
+  vertical-align: bottom;
+}
+
+pre {
+  font-family: "Courier 10 Pitch", Courier, monospace;
+  line-height: 140%;
+  white-space: pre;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+}
+
+[role="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: var(--link-color);
+  text-decoration: none;
+  &:hover {
+    color: var(--link-hover-color);
+  }
+}
+
+/* Reset `button` and button-style `input` default styles */
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  color: inherit;
+  /* cursor: default; */
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  outline: none;
+  padding: 0;
+  -webkit-appearance: button; /* for input */
+  -webkit-user-select: none; /* for button */
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  color: var(--link-color);
+  text-decoration: none;
+  &:hover {
+    color: var(--link-hover-color);
+  }
+  &:active {
+    outline: none;
+  }
+}
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/* Make `a` like a button */
+[role="button"] {
+    color: inherit;
+    cursor: default;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    white-space: pre;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+
+input::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+:root {
+  --width: 800px;
+  --content-width: 700px;
+}
