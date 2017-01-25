@@ -1,18 +1,15 @@
 // @flow-weak
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
 import Immutable from 'immutable';
 import createSagaMiddleware from 'redux-saga';
 // import Reactotron from 'reactotron-react-js'
 // import createReactotronEnhancer from 'reactotron-redux'
 import rootSaga from './sagas';
 
-export default function createStore(history: Object, data: Object = {}) {
+export default function createStore(data: Object = {}) {
   // Sync dispatched route actions to the history
-  const reduxRouterMiddleware = routerMiddleware(history);
   const sagaMiddleware = createSagaMiddleware();
-
-  const middleware = [ reduxRouterMiddleware, sagaMiddleware ];
+  const middleware = [ sagaMiddleware ];
 
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {

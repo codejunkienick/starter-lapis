@@ -25,13 +25,8 @@ consoleErrorReporter.propTypes = {
 
 
 const dest = document.getElementById('content');
-const store = createStore(browserHistory, window.reduxState);
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState(state) {
-    return state.get('router').toJS();
-  }
-});
-
+const store = createStore(window.reduxState);
+const history = browserHistory;
 //
 // function initSocket() {
 //   const socket = io('', { path: '/ws' });

@@ -5,6 +5,7 @@
     "syntax-flow",
     "transform-flow-strip-types",
     "add-module-exports",
+    "system-import-transformer",
     "transform-decorators-legacy",
     "transform-react-display-name",
     "react-hot-loader/babel"

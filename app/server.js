@@ -7,8 +7,6 @@ import httpProxy from 'http-proxy';
 import path from 'path';
 import PrettyError from 'pretty-error';
 import http from 'http';
-import { match, RouterContext } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import { Provider } from 'react-redux';
 import getRoutes from './routes';
@@ -73,47 +71,46 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
   const memoryHistory = createHistory(req.originalUrl);
-  const store = createStore(memoryHistory);
-  const history = syncHistoryWithStore(memoryHistory, store, {
-    selectLocationState(state) {
-      return state.get('router').toJS();
-    }
-  });
+  const store = createStore();
+  const history = memoryHistory;
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
       ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />));
   }
 
-  if (__DISABLE_SSR__) {
-    hydrateOnClient();
-    return;
-  }
+  hydrateOnClient();
+  return;
 
-  match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
-    if (redirectLocation) {
-      res.redirect(redirectLocation.pathname + redirectLocation.search);
-    } else if (error) {
-      console.error('ROUTER ERROR:', pretty.render(error));
-      res.status(500);
-      hydrateOnClient();
-    } else if (renderProps) {
-      const component = (
-        <Provider store={store} key="provider">
-          <RouterContext {...renderProps} />
-        </Provider>
-      );
-
-      res.status(200);
-
-      global.navigator = { userAgent: req.headers['user-agent'] };
-
-      res.send('<!doctype html>\n' +
-        ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />));
-    } else {
-      res.status(404).send('Not found');
-    }
-  });
+  // if (__DISABLE_SSR__) {
+  //   hydrateOnClient();
+  //   return;
+  // }
+  //
+  // match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
+  //   if (redirectLocation) {
+  //     res.redirect(redirectLocation.pathname + redirectLocation.search);
+  //   } else if (error) {
+  //     console.error('ROUTER ERROR:', pretty.render(error));
+  //     res.status(500);
+  //     hydrateOnClient();
+  //   } else if (renderProps) {
+  //     const component = (
+  //       <Provider store={store} key="provider">
+  //         <RouterContext {...renderProps} />
+  //       </Provider>
+  //     );
+  //
+  //     res.status(200);
+  //
+  //     global.navigator = { userAgent: req.headers['user-agent'] };
+  //
+  //     res.send('<!doctype html>\n' +
+  //       ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />));
+  //   } else {
+  //     res.status(404).send('Not found');
+  //   }
+  // });
 });
 
 if (config.port) {

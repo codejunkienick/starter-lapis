@@ -1,17 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
-import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
-import WebpackIsomorphicToolsConfig from './webpack-isomorphic-tools.js';
 import postcss from './postcss-config.js';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 
-const assetsPath = path.resolve(__dirname, '../static/dist');
+const assetsPath = path.resolve(__dirname, '../static/dist/dll');
 const host = (process.env.HOST || 'localhost');
 const port = (+process.env.PORT + 1) || 3001;
 
-// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(WebpackIsomorphicToolsConfig);
 
 const babelrc = fs.readFileSync('./.babelrc');
 let babelrcObject = {};
@@ -44,25 +40,12 @@ export default {
       'react-dom',
       'react-redux',
       'react-router',
-      'react-router-redux',
-      'react-router-scroll',
-      'react-scroll',
-      'react-dropzone',
       'react-immutable-proptypes',
       'react-css-modules',
       'react-motion',
-      'react-scrollbar',
-      'react-select',
       'react-autosuggest',
       'redux-devtools-log-monitor',
-      'react-maskedinput',
       'react-modal',
-      'react-intercom',
-      'react-sticky',
-      'react-timeago',
-      'react-dnd',
-      'yandex-map-react',
-      'lodash',
       'redux',
       'redux-form',
       'redux-saga',
@@ -97,8 +80,7 @@ export default {
       {
         test: /\.html$/,
         loaders: [
-          'html-loader?exportAsEs6Default',
-          'typograf-loader?lang=ru'
+          'html-loader?exportAsEs6Default'
         ]
       },
       { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel-loader?' + JSON.stringify(babelLoaderQuery)]},
@@ -110,7 +92,6 @@ export default {
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=image/svg+xml" },
-      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
     ]
   },
   resolve: {
@@ -119,9 +100,6 @@ export default {
       'node_modules'
     ],
     extensions: ['*', '.json', '.js', '.jsx'],
-    alias: {
-      react: path.resolve('./node_modules/react'),
-    }
   },
   plugins: [
     new HardSourceWebpackPlugin({
@@ -182,6 +160,5 @@ export default {
       __DEVELOPMENT__: true,
       __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
     }),
-    webpackIsomorphicToolsPlugin.development()
   ]
 };
