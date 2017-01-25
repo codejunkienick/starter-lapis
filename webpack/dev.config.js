@@ -52,7 +52,7 @@ const config = server => ({
   output: {
     path: server
       ? path.resolve(__dirname, '../static/dist/server')
-      : path.resolve(__dirname, '../static/dist/client'),
+      : path.resolve(__dirname, '../static/dist'),
     filename: '[name].js',
     chunkFilename: '[id].[hash].js',
     libraryTarget: (server ? 'commonjs2' : 'var'),
@@ -68,7 +68,7 @@ const config = server => ({
     loaders: [
       {
         test: /\.html$/,
-        loaders: [ 'html-loader?exportAsEs6Default', 'typograf-loader?lang=ru' ]
+        loaders: [ 'html-loader?exportAsEs6Default' ]
       },
       {
         test: /\.jsx?$/,
@@ -79,10 +79,6 @@ const config = server => ({
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[local]___[hash:base64:5]!postcss-loader'
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[local]___[hash:base64:5]!postcss-loader!sass-loader'
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -111,6 +107,13 @@ const config = server => ({
     new StatsPlugin('stats.json', {
       chunkModules: true,
       exclude: [/node_modules/]
+    }),
+
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context  : __dirname,
+        postcss: postcss(),
+      },
     }),
     new webpack.ProvidePlugin({ React: 'react' }),
     new webpack.optimize.OccurrenceOrderPlugin(),

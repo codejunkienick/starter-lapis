@@ -23,16 +23,12 @@ consoleErrorReporter.propTypes = {
   error: React.PropTypes.instanceOf(Error).isRequired
 };
 
-
 const dest = document.getElementById('content');
 const store = createStore(window.reduxState);
 const history = browserHistory;
-//
-// function initSocket() {
-//   const socket = io('', { path: '/ws' });
-//   return socket;
-// }
-// global.socket = initSocket();
+
+// Remove redbox 
+delete AppContainer.prototype.unstable_handleError; // FIXME;
 
 ReactDOM.render(
   <AppContainer>
@@ -55,13 +51,9 @@ if (module && module.hot) {
 
 
 if (process.env.NODE_ENV !== 'production') {
-  // Reactotron
-  //   .configure() // we can use plugins here -- more on this later
-  //   .connect() // let's connect!
 
   window.React = React; // enable debugger
 
   if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
-    // console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
   }
 }

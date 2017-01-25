@@ -9,7 +9,6 @@ function postcss(webpack) {
         require("postcss-cssnext")(),
         // add your "plugins" here
         require("postcss-nested")(),
-        require('lost')(),
         require('postcss-inline-svg')(),
         //require("postcss-pxtorem")(),
         // and if you want to compress,

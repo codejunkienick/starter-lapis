@@ -15,12 +15,12 @@ webpackConfig.forEach(function(config) {
   const compiler = webpack(config);
   const serverOptions = {
     contentBase: 'http://' + host + ':' + port,
-    quiet: true,
-    noInfo: true,
+    quiet: false,
+    noInfo: false,
     hot: true,
     inline: true,
     lazy: false,
-    publicPath: webpackConfig[0].output.publicPath,
+    publicPath: config.output.publicPath,
     headers: {'Access-Control-Allow-Origin': '*'},
     stats: {colors: true}
   };

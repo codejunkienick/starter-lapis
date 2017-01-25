@@ -1,28 +1,15 @@
 // @flow
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import applyStyles from 'react-css-modules';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
-import { push, goBack } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
-import styles from './App.css';
+import './App.css';
 import config from '../../config';
 import { actions } from 'redux/actions/app';
 
-@connect(
-  (state, ownProps) => ({
-    router: state.get('router'),
-    location: ownProps.location
-  }),
-  {
-    pushState: push,
-    pushStateBack: goBack,
-  }
-)
-@applyStyles(styles)
-export default class App extends Component {
+class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     pushState: PropTypes.func.isRequired,
@@ -33,10 +20,6 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    const { location: { pathname } } = this.props;
-    if (!this.props.userLoaded) {
-      this.props.loadUser(pathname);
-    }
   }
 
   // Observe loading and set proper styles when fonts have loaded
@@ -83,3 +66,8 @@ export default class App extends Component {
     );
   }
 }
+export default connect(
+  (state, ownProps) => ({
+
+  }),
+)(App)

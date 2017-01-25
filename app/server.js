@@ -65,18 +65,11 @@ proxy.on('error', (error, req, res) => {
 });
 
 app.use((req, res) => {
-  if (__DEVELOPMENT__) {
-    // Do not cache webpack stats: the script file would change since
-    // hot module replacement is enabled in the development env
-    webpackIsomorphicTools.refresh();
-  }
-  const memoryHistory = createHistory(req.originalUrl);
-  const store = createStore();
-  const history = memoryHistory;
-
   function hydrateOnClient() {
-    res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />));
+    res.sendfile('../static/dist/index.html')
+    // res.send('<!doctype html>\n' +
+    //   ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />));
+    
   }
 
   hydrateOnClient();
