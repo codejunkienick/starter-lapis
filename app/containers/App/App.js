@@ -1,13 +1,19 @@
 // @flow
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import s from './App.css';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import FontFaceObserver from 'fontfaceobserver';
-import './App.css';
 import config from '../../config';
 import { actions } from 'redux/actions/app';
+import { Route, Link } from 'react-router-dom'
+
+const Home = () => (
+  <div>
+    <h2>Home</h2>
+  </div>
+)
 
 class App extends Component {
   static propTypes = {
@@ -32,34 +38,28 @@ class App extends Component {
     });
   }
 
-
-  handleReconnect = () => {
-    this.props.clearConnectionError();
-  }
-
   render() {
     const { connectionError, location } = this.props;
     return (
-      <div styleName="app-wrap">
+      <div styleName="s.app-wrap">
         <Helmet {...config.app.head} />
-        <div styleName="app">
+        <div styleName="s.app">
           { connectionError &&
-              <div styleName="connection-error">
+              <div styleName="s.connection-error">
                 <span>
                   Вы не в сети
                 </span>
               </div>
           }
-          <header styleName="header-landing">
-            <Link to="/" styleName="logo">
+          <header styleName="s.header-landing">
+            <Link to="/" styleName="s.logo">
               Starter Lapis
             </Link>
           </header>
-          <div styleName="navigation">
-            <Link to="/home" activeClassName={styles['active-link']}>Haome</Link>
+          <div styleName="s.navigation">
           </div>
-          <div styleName="appContent">
-            {this.props.children}
+          <div styleName="s.appContent">
+            <Route exact path="/" component={Home} />
           </div>
         </div>
       </div>

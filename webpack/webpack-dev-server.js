@@ -1,4 +1,5 @@
 require('babel-polyfill');
+
 import Express from 'express';
 import webpack from 'webpack';
 import DashboardPlugin from 'webpack-dashboard/plugin';
@@ -6,15 +7,18 @@ import config from '../app/config';
 import webpackConfig from './dev.config';
 import devMiddleware from 'webpack-dev-middleware';
 import hotMiddleware from 'webpack-hot-middleware';
+import path from 'path';
 
 const app = new Express();
 const host = config.host || 'localhost';
 const port = (Number(config.port) + 1) || 3001;
 
+console.log(path.resolve(__dirname, '../static/dist'));
+
 webpackConfig.forEach(function(config) {
   const compiler = webpack(config);
   const serverOptions = {
-    contentBase: 'http://' + host + ':' + port,
+    contentBase: path.resolve(__dirname, '../static'),
     quiet: false,
     noInfo: false,
     hot: true,
@@ -26,12 +30,13 @@ webpackConfig.forEach(function(config) {
   };
 
     app.use(devMiddleware(compiler, serverOptions));
-    app.use(hotMiddleware(compiler, {
-        log: console.log, path: config.output.publicPath + '__webpack_hmr', heartbeat: 10 * 1000
-    }));
+  app.use(hotMiddleware(compiler));
+
 })
 
-
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.listen(port, (err) => {
   if (err) {

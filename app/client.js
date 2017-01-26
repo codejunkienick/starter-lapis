@@ -7,7 +7,6 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './root';
 import { Provider } from 'react-redux';
-import { Router, browserHistory, RouterContext, applyRouterMiddleware } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import createStore from './redux/create';
 // import Reactotron from 'reactotron-react-js'
@@ -25,14 +24,13 @@ consoleErrorReporter.propTypes = {
 
 const dest = document.getElementById('content');
 const store = createStore(window.reduxState);
-const history = browserHistory;
 
 // Remove redbox 
 delete AppContainer.prototype.unstable_handleError; // FIXME;
 
 ReactDOM.render(
   <AppContainer>
-    <Root store={store} history={history} />
+    <Root store={store}/>
   </AppContainer>,
   dest
 );

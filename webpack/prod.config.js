@@ -11,10 +11,7 @@ var postcss = require('./postcss-config.js');
 var projectRootPath = path.resolve(__dirname, '../');
 var assetsPath = path.resolve(projectRootPath, './static/dist');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
-// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
+var ResourceHintWebpackPlugin = require('resource-hints-webpack-plugin');
 
 var HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
@@ -37,20 +34,17 @@ module.exports = {
       {
         test: /\.html$/,
         loaders: [
-          'html-loader',
-          'typograf-loader?lang=ru'
+          'html-loader'
         ]
       },
       { test: /\.jsx?$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel-loader']},
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.css$/, loader: ExtractTextPlugin.extract({fallbackLoader: 'style-loader', loader: 'css-loader?modules&importLoaders=1!postcss-loader'}) },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract({fallbackLoader: 'style-loader', loader: 'css-loader?modules&importLoaders=1!postcss-loader!sass-loader'}) },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=image/svg+xml!image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false" },
-      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
     ]
   },
   resolve: {
@@ -59,9 +53,6 @@ module.exports = {
       'node_modules'
     ],
     extensions: ['*', '.json', '.js', '.jsx'],
-    alias: {
-      react: path.resolve('./node_modules/react'),
-    }
   },
   plugins: [
     new HardSourceWebpackPlugin({
@@ -107,7 +98,6 @@ module.exports = {
       },
     }),
     new CleanPlugin([assetsPath], { root: projectRootPath }),
-    // css files from the extract-text-plugin loader
     new ExtractTextPlugin({filename: '[name]-[chunkhash].css', allChunks: true, ignoreOrder: true}),
     new webpack.DefinePlugin({
       'process.env': {
@@ -135,7 +125,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      inject: 'body',
+      inject: 'head',
       favicon: path.resolve(__dirname, '..', 'static', 'favicon.ico'),
       filename: 'index.html',
       template: path.resolve(__dirname, '..', 'static', 'template.html'),
@@ -147,7 +137,7 @@ module.exports = {
         collapseBooleanAttributes: true
       }
     }),
+    new ResourceHintWebpackPlugin()
 
-    webpackIsomorphicToolsPlugin
   ]
 };

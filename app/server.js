@@ -1,16 +1,10 @@
 import Express from 'express';
-import React from 'react';
-import ReactDOM from 'react-dom/server';
 import favicon from 'serve-favicon';
 import compression from 'compression';
 import httpProxy from 'http-proxy';
 import path from 'path';
 import PrettyError from 'pretty-error';
 import http from 'http';
-import createHistory from 'react-router/lib/createMemoryHistory';
-import { Provider } from 'react-redux';
-import getRoutes from './routes';
-import createStore from './redux/create';
 import config from './config';
 import Html from './html';
 
@@ -66,12 +60,8 @@ proxy.on('error', (error, req, res) => {
 
 app.use((req, res) => {
   function hydrateOnClient() {
-    res.sendfile('../static/dist/index.html')
-    // res.send('<!doctype html>\n' +
-    //   ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />));
-    
+    res.sendFile( path.resolve(__dirname, 'index.html'));
   }
-
   hydrateOnClient();
   return;
 

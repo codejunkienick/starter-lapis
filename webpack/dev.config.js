@@ -4,12 +4,14 @@ import webpack from 'webpack';
 import postcss from './postcss-config.js';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const nodeModules = {};
 fs.readdirSync(path.resolve(__dirname, '../node_modules'))
   .filter(x => ['.bin'].indexOf(x) === -1)
   .forEach(mod => nodeModules[mod] = `commonjs ${mod}`);
 
+const assetsPath = path.join(__dirname, 'dist');
 const host = process.env.HOST || 'localhost';
 const port = +process.env.PORT + 1 || 3001;
 
@@ -24,6 +26,7 @@ try {
   console.error(err);
 }
 
+
 let combinedPlugins = babelrcObject.plugins || [];
 
 let babelLoaderQuery = Object.assign({}, babelrcObject, {
@@ -32,31 +35,40 @@ let babelLoaderQuery = Object.assign({}, babelrcObject, {
 delete babelLoaderQuery.env;
 
 babelLoaderQuery.plugins = babelLoaderQuery.plugins || [];
+const main = [
+  'react-hot-loader/patch',
+  'webpack-hot-middleware/client?path=http://' +
+  host +
+  ':' +
+  port +
+  '/__webpack_hmr',
+];
+
+const entryPoint = server =>
+  server
+    ? { entry: { main: [ ...main, './app/app.js' ] } }
+    : { entry: { main: [ ...main, './app/client.js' ] } };
+
+
 
 const config = server => ({
   devtool: 'cheap-module-eval-source-map',
   context: path.resolve(__dirname, '..'),
   cache: true,
   performance: { hints: false },
-  entry: {
-    main: [
-      'react-hot-loader/patch',
-      'webpack-hot-middleware/client?path=http://' +
-        host +
-        ':' +
-        port +
-        '/__webpack_hmr',
-      './app/client.js'
-    ]
-  },
+  
+  ...entryPoint(server),
+
   output: {
-    path: server
-      ? path.resolve(__dirname, '../static/dist/server')
-      : path.resolve(__dirname, '../static/dist'),
-    filename: '[name].js',
-    chunkFilename: '[id].[hash].js',
-    libraryTarget: (server ? 'commonjs2' : 'var'),
-    publicPath: 'http://' + host + ':' + port + '/dist/',
+    path: assetsPath,
+    // path: server
+    // ? path.resolve(__dirname, '../static/dist/server')
+    // : path.resolve(__dirname, '../static/dist'),
+    publicPath: '/dist/',
+    filename: 'app.js',
+    // filename: '[name].js',
+    // chunkFilename: '[id].[hash].js',
+  libraryTarget: (server ? 'commonjs2' : 'var'),
     devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]'
   },
 
@@ -100,9 +112,11 @@ const config = server => ({
     ]
   },
   resolve: {
+    // fallback: path.resolve(__dirname, "../node_modules"),
     modules: [ 'app', 'node_modules' ],
     extensions: [ '*', '.json', '.js', '.jsx' ],
   },
+  // resolveLoader: { fallback: path.resolve(__dirname, "../node_modules") },
   plugins: [
     new StatsPlugin('stats.json', {
       chunkModules: true,
@@ -122,7 +136,7 @@ const config = server => ({
     //   manifest: require(path.resolve(__dirname, '../static/dist/dll'))
     // }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     //new webpack.IgnorePlugin(/webpack-stats\.json$/),
     //webpackIsomorphicToolsPlugin.development()
     new webpack.DefinePlugin({
@@ -130,9 +144,23 @@ const config = server => ({
       __SERVER__: false,
       __DEVELOPMENT__: true,
       __DEVTOOLS__: true
-    })
+    }),
+
+    new HtmlWebpackPlugin({
+      inject: 'head',
+      favicon: path.resolve(__dirname, '..', 'static', 'favicon.ico'),
+      filename: 'index.html',
+      template: path.resolve(__dirname, '..', 'static', 'template.html'),
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        removeAttributeQuotes: true,
+        collapseBooleanAttributes: true
+      }
+    }),
   ]
 });
 
-export default [ config(true), config(false) ];
+export default [ config(false) ];
 

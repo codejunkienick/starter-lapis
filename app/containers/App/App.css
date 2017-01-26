@@ -21,9 +21,6 @@ html, body { height: 100%; }
   margin: 0 auto;
 }
 
-.close-icon {
-  composes: close-icon from 'css/icons.css';
-}
 
 .navigation {
   position: fixed;
