@@ -6,39 +6,25 @@ import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
-import WebpackIsomorphicToolsConfig from './webpack-isomorphic-tools.js';
-
-const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(WebpackIsomorphicToolsConfig);
 
 const nodeModules = {};
 fs.readdirSync(path.resolve(__dirname, '../node_modules'))
   .filter(x => ['.bin'].indexOf(x) === -1)
   .forEach(mod => nodeModules[mod] = `commonjs ${mod}`);
 
-const assetsPath = path.join(__dirname, 'dist');
+const context = path.resolve(__dirname, '../');
+const assetsPath = path.resolve(__dirname, '../static/dist');
 const host = process.env.HOST || 'localhost';
 const port = +process.env.PORT + 1 || 3001;
-const context = path.resolve(__dirname, '../');
-
-// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 const babelrc = fs.readFileSync('./.babelrc');
 
-let babelrcObject = {};
+let babelLoaderQuery = {};
 try {
-  babelrcObject = JSON.parse(babelrc);
+  babelLoaderQuery = JSON.parse(babelrc);
 } catch (err) {
   console.error('==>     ERROR: Error parsing your .babelrc.');
   console.error(err);
 }
-
-
-let combinedPlugins = babelrcObject.plugins || [];
-
-let babelLoaderQuery = Object.assign({}, babelrcObject, {
-  plugins: combinedPlugins
-});
-delete babelLoaderQuery.env;
 
 babelLoaderQuery.plugins = [
 		[
@@ -50,10 +36,8 @@ babelLoaderQuery.plugins = [
 			}
 		],
   ...babelLoaderQuery.plugins, 
-] || [];
-
-console.log(babelLoaderQuery.plugins);
-
+    "react-hot-loader/babel"
+];
 
 const main = [
   'react-hot-loader/patch',
@@ -80,14 +64,12 @@ const config = server => ({
   ...entryPoint(server),
 
   output: {
-    path: assetsPath,
-    // path: server
-    // ? path.resolve(__dirname, '../static/dist/server')
-    // : path.resolve(__dirname, '../static/dist'),
-    publicPath: '/dist/',
+    path: server
+    ? path.resolve(__dirname, '../static/dist/server')
+    : assetsPath,
+    publicPath: 'http://' + host + ':' + port + '/dist/',
     filename: 'app.js',
-    // filename: '[name].js',
-    // chunkFilename: '[id].[hash].js',
+    chunkFilename: '[id].[hash].js',
     libraryTarget: (server ? 'commonjs2' : 'var'),
     devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]'
   },
@@ -129,11 +111,9 @@ const config = server => ({
     ]
   },
   resolve: {
-    // fallback: path.resolve(__dirname, "../node_modules"),
     modules: [ 'app', 'node_modules' ],
     extensions: [ '*', '.json', '.js', '.jsx' ],
   },
-  // resolveLoader: { fallback: path.resolve(__dirname, "../node_modules") },
   plugins: [
     new StatsPlugin('stats.json', {
       chunkModules: true,
@@ -148,10 +128,10 @@ const config = server => ({
     }),
     new webpack.ProvidePlugin({ React: 'react' }),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    // new webpack.DllReferencePlugin({
-    //   context: path.join(__dirname, '../'),
-    //   manifest: require(path.resolve(__dirname, '../static/dist/dll'))
-    // }),
+    new webpack.DllReferencePlugin({
+      context,
+      manifest: require(path.resolve(assetsPath, 'vendor-manifest.json'))
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
@@ -162,7 +142,6 @@ const config = server => ({
       __DEVTOOLS__: true
     }),
 
-    webpackIsomorphicToolsPlugin.development()
   ]
 });
 

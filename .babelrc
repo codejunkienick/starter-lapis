@@ -7,8 +7,6 @@
     "add-module-exports",
     "system-import-transformer",
     "transform-decorators-legacy",
-    "transform-react-display-name",
-    "react-hot-loader/babel"
+    "transform-react-display-name"
   ]
-
 }
