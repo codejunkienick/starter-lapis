@@ -7,6 +7,10 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import config from './config';
 import Html from './html';
+import createStore from './redux/create';
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import { StaticRouter } from 'react-router'
 
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 const pretty = new PrettyError();
@@ -59,8 +63,15 @@ proxy.on('error', (error, req, res) => {
 });
 
 app.use((req, res) => {
+  if (__DEVELOPMENT__) {
+    // Do not cache webpack stats: the script file would change since
+    // hot module replacement is enabled in the development env
+    webpackIsomorphicTools.refresh();
+  }
+  const store = createStore();
   function hydrateOnClient() {
-    res.sendFile( path.resolve(__dirname, 'index.html'));
+    res.send('<!doctype html>\n' +
+      ReactDOMServer.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />));
   }
   hydrateOnClient();
   return;
@@ -69,31 +80,6 @@ app.use((req, res) => {
   //   hydrateOnClient();
   //   return;
   // }
-  //
-  // match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
-  //   if (redirectLocation) {
-  //     res.redirect(redirectLocation.pathname + redirectLocation.search);
-  //   } else if (error) {
-  //     console.error('ROUTER ERROR:', pretty.render(error));
-  //     res.status(500);
-  //     hydrateOnClient();
-  //   } else if (renderProps) {
-  //     const component = (
-  //       <Provider store={store} key="provider">
-  //         <RouterContext {...renderProps} />
-  //       </Provider>
-  //     );
-  //
-  //     res.status(200);
-  //
-  //     global.navigator = { userAgent: req.headers['user-agent'] };
-  //
-  //     res.send('<!doctype html>\n' +
-  //       ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />));
-  //   } else {
-  //     res.status(404).send('Not found');
-  //   }
-  // });
 });
 
 if (config.port) {

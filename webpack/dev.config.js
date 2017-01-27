@@ -5,6 +5,11 @@ import postcss from './postcss-config.js';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
+import WebpackIsomorphicToolsConfig from './webpack-isomorphic-tools.js';
+
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(WebpackIsomorphicToolsConfig);
 
 const nodeModules = {};
 fs.readdirSync(path.resolve(__dirname, '../node_modules'))
@@ -14,6 +19,7 @@ fs.readdirSync(path.resolve(__dirname, '../node_modules'))
 const assetsPath = path.join(__dirname, 'dist');
 const host = process.env.HOST || 'localhost';
 const port = +process.env.PORT + 1 || 3001;
+const context = path.resolve(__dirname, '../');
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 const babelrc = fs.readFileSync('./.babelrc');
@@ -34,7 +40,21 @@ let babelLoaderQuery = Object.assign({}, babelrcObject, {
 });
 delete babelLoaderQuery.env;
 
-babelLoaderQuery.plugins = babelLoaderQuery.plugins || [];
+babelLoaderQuery.plugins = [
+		[
+			"react-css-modules",
+			{
+        context: context,
+        webpackHotModuleReloading: true,
+				"generateScopedName": "[path]___[local]___[hash:base64:5]"
+			}
+		],
+  ...babelLoaderQuery.plugins, 
+] || [];
+
+console.log(babelLoaderQuery.plugins);
+
+
 const main = [
   'react-hot-loader/patch',
   'webpack-hot-middleware/client?path=http://' +
@@ -53,7 +73,7 @@ const entryPoint = server =>
 
 const config = server => ({
   devtool: 'cheap-module-eval-source-map',
-  context: path.resolve(__dirname, '..'),
+  context: context,
   cache: true,
   performance: { hints: false },
   
@@ -68,7 +88,7 @@ const config = server => ({
     filename: 'app.js',
     // filename: '[name].js',
     // chunkFilename: '[id].[hash].js',
-  libraryTarget: (server ? 'commonjs2' : 'var'),
+    libraryTarget: (server ? 'commonjs2' : 'var'),
     devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]'
   },
 
@@ -88,10 +108,7 @@ const config = server => ({
         loaders: [ 'babel-loader?' + JSON.stringify(babelLoaderQuery) ]
       },
       { test: /\.json$/, loader: 'json-loader' },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[local]___[hash:base64:5]!postcss-loader'
-      },
+      { test: /\.css$/, loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[path]___[local]___[hash:base64:5]!postcss-loader' },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader?limit=10000&mimetype=application/font-woff'
@@ -125,7 +142,7 @@ const config = server => ({
 
     new webpack.LoaderOptionsPlugin({
       options: {
-        context  : __dirname,
+        context  : context,
         postcss: postcss(),
       },
     }),
@@ -137,8 +154,7 @@ const config = server => ({
     // }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    //new webpack.IgnorePlugin(/webpack-stats\.json$/),
-    //webpackIsomorphicToolsPlugin.development()
+    new webpack.IgnorePlugin(/webpack-stats\.json$/),
     new webpack.DefinePlugin({
       __CLIENT__: true,
       __SERVER__: false,
@@ -146,19 +162,7 @@ const config = server => ({
       __DEVTOOLS__: true
     }),
 
-    new HtmlWebpackPlugin({
-      inject: 'head',
-      favicon: path.resolve(__dirname, '..', 'static', 'favicon.ico'),
-      filename: 'index.html',
-      template: path.resolve(__dirname, '..', 'static', 'template.html'),
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        removeAttributeQuotes: true,
-        collapseBooleanAttributes: true
-      }
-    }),
+    webpackIsomorphicToolsPlugin.development()
   ]
 });
 

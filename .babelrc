@@ -2,12 +2,6 @@
   "presets": ["es2015", "react", "stage-0"],
 
   "plugins": [
-		[
-			"react-css-modules",
-			{
-				"generateScopedName": "[path]___[local]___[hash:base64:5]"
-			}
-		],
     "syntax-flow",
     "transform-flow-strip-types",
     "add-module-exports",

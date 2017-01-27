@@ -1,7 +1,7 @@
 // @flow
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import s from './App.css';
+import './App.css';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import FontFaceObserver from 'fontfaceobserver';
@@ -41,24 +41,24 @@ class App extends Component {
   render() {
     const { connectionError, location } = this.props;
     return (
-      <div styleName="s.app-wrap">
+      <div styleName="app-wrap">
         <Helmet {...config.app.head} />
-        <div styleName="s.app">
+        <div styleName="app">
           { connectionError &&
-              <div styleName="s.connection-error">
+              <div styleName="connection-error">
                 <span>
                   Вы не в сети
                 </span>
               </div>
           }
-          <header styleName="s.header-landing">
-            <Link to="/" styleName="s.logo">
+          <header styleName="header-landing">
+            <Link to="/" styleName="logo">
               Starter Lapis
             </Link>
           </header>
-          <div styleName="s.navigation">
+          <div styleName="navigation">
           </div>
-          <div styleName="s.appContent">
+          <div styleName="appContent">
             <Route exact path="/" component={Home} />
           </div>
         </div>
