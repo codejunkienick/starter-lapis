@@ -1,6 +1,72 @@
 # LAPIS
 
 
+## Structure
+
+```
+app
+├── client.js
+├── server.js
+├── constants.js
+├── ServerTemplate.js
+├── ClientTemplate.js
+├── Html.js
+├── config
+│   ├── routes.js
+│   └── index.js
+├── screens
+│   └── App
+│       ├── components
+│       ├── screens
+│       │   ├── Admin
+│       │   │   ├── components
+│       │   │   ├── screens
+│       │   │   │   ├── Reports
+│       │   │   │   │   ├── components
+│       │   │   │   │   └── index.js
+│       │   │   │   └── Users
+│       │   │   │       ├── index.js
+│       │   │   │       └── styles.css
+│       │   │   ├── index.js
+│       │   │   └── styles.css
+│       │   └── Course
+│       │       ├── screens
+│       │       │   └── Assignments
+│       │       │       └── index.js
+│       │       └── index.js
+│       └── index.js
+├── core
+│   ├── utils
+│   │    └── validation.js
+│   ├── atoms
+│   │   ├── Link
+│   │   └── Icon
+│   ├── molecules
+│   │   └── IconLink
+│   └── organisms
+│       └── Header
+├── redux
+│   ├── createStore.js
+│   ├── actions
+│   │    ├── user.js
+│   │    └── reports.js
+│   ├── reducers
+│   │    ├── user.js
+│   │    └── reports.js
+│   └── sagas
+│        ├── user.js
+│        └── reports.js
+├── data
+│   ├── apiClient.js
+│   ├── user.js
+│   └── index.js
+└── css
+    ├── global.css
+    ├── variables.css
+    └── helpers.css
+
+```
+
 ## TODO
 
 

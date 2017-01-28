@@ -2,8 +2,6 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import Immutable from 'immutable';
 import createSagaMiddleware from 'redux-saga';
-// import Reactotron from 'reactotron-react-js'
-// import createReactotronEnhancer from 'reactotron-redux'
 import rootSaga from './sagas';
 
 export default function createStore(data: Object = {}) {
@@ -15,7 +13,7 @@ export default function createStore(data: Object = {}) {
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
     // const reactotronEnhancer = createReactotronEnhancer(Reactotron)
     const { persistState } = require('redux-devtools');
-    const DevTools = require('../containers/DevTools/DevTools');
+    const DevTools = require('../core/DevTools');
     finalCreateStore = compose(
       // reactotronEnhancer,
       applyMiddleware(...middleware),

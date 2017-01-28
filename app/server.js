@@ -6,7 +6,7 @@ import path from 'path';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import config from './config';
-import Html from './html';
+import Html from './Html';
 import createStore from './redux/create';
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'

@@ -1,31 +1,18 @@
 // @flow
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import './App.css';
+import './index.css';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import FontFaceObserver from 'fontfaceobserver';
 import config from '../../config';
 import { actions } from 'redux/actions/app';
 import { Route, Link } from 'react-router-dom'
-
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-)
+import Home from './Home';
 
 class App extends Component {
-  static propTypes = {
-    children: PropTypes.object.isRequired,
-    pushState: PropTypes.func.isRequired,
-  };
-
   componentWillMount() {
     this.loadFonts();
-  }
-
-  componentDidMount() {
   }
 
   // Observe loading and set proper styles when fonts have loaded

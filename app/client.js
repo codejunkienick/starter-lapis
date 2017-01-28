@@ -5,7 +5,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import Root from './root';
+import ClientTemplate from './ClientTemplate';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import createStore from './redux/create';
@@ -30,17 +30,17 @@ delete AppContainer.prototype.unstable_handleError; // FIXME;
 
 ReactDOM.render(
   <AppContainer>
-    <Root store={store}/>
+    <ClientTemplate store={store}/>
   </AppContainer>,
   dest
 );
 
 if (module && module.hot) {
-  module.hot.accept('./root', () => {
-    const NextApp = require('./root.js');
+  module.hot.accept('./ClientTemplate', () => {
+    const NextApp = require('./ClientTemplate.js');
     ReactDOM.render(
       <AppContainer errorReporter={consoleErrorReporter}>
-        <NextApp store={store} history={history} />
+        <NextApp store={store} />
       </AppContainer>,
       dest
     );
