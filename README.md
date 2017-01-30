@@ -2,6 +2,14 @@
 
 
 ## Structure
+__client.js__ entry point for client rendering
+__server.js__ entry point for server rendering. **SSR IS NOT IMPLEMENTED YET**
+__Html.js__ boilerplate html for clientside rendering and serverside rendering.
+__data__ folder is for anything related to handling api requests. index.js exports functions that return api calls wrapped in Promises. Right now **axios** is used for api client.
+__config__ folder is for configuration of client app. 
+__screens__ folder is for routes. I use structure proposed by ryanflorence and it works great with react-router@v4 declarative structure.
+__redux__ do i need to explain that to you?
+__css__ any css classes that is shared among components and can be used through CSSModules syntax (e.g. composes: a from 'css/helpers.css')
 
 ```
 app
