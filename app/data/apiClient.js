@@ -3,7 +3,7 @@ import config from '../config';
 import axios from 'axios';
 
 // TODO: ADD Normalizr: https://github.com/gaearon/normalizr
-const methods: Array<string> = [ 'get', 'post', 'put', 'patch', 'delete' ];
+const methods: Array<string> = ['get', 'post', 'put', 'patch', 'delete'];
 function formatUrl(path: string, external: boolean) {
   if (external) return path;
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
@@ -45,8 +45,7 @@ class ApiClient {
         });
     }
   }
-  empty() {
-  }
+  empty() {}
 }
 
 const apiClient = new ApiClient();

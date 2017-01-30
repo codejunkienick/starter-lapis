@@ -3,4 +3,3 @@ export default {
     return api.get('/app/load');
   },
 };
-

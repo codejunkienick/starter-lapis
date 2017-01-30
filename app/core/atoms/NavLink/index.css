@@ -1,0 +1,9 @@
+@import 'variables';
+
+.link {
+  color: var(--link-color);
+}
+
+.active {
+  color: var(--primary-color);
+}

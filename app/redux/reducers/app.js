@@ -3,10 +3,7 @@ import { fromJS, Map, Stack, List } from 'immutable';
 import * as TYPES from '../actions/app';
 import guid from 'core/utils/guid';
 
-const initialState = fromJS({
-  errors: Map(),
-  notifications: Map(),
-});
+const initialState = fromJS({ errors: Map(), notifications: Map() });
 
 export default function app(state: Object = initialState, action: Object = {}) {
   const { response = {}, error } = action;
@@ -15,7 +12,7 @@ export default function app(state: Object = initialState, action: Object = {}) {
     case TYPES.SERVER_ERROR:
       alert(action.msg);
       return state.setIn(
-        [ 'errors', uuid ],
+        ['errors', uuid],
         Map({ message: action.msg, id: uuid }),
       );
 
@@ -30,7 +27,7 @@ export default function app(state: Object = initialState, action: Object = {}) {
     case TYPES.SERVER_NOTIFICATION:
       alert(action.msg);
       return state.setIn(
-        [ 'notifications', uuid ],
+        ['notifications', uuid],
         Map({ message: action.msg, id: uuid }),
       );
 

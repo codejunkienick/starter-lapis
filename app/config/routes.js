@@ -1,6 +1,4 @@
 //Export collection of Routes
-const ROUTES = [
-
-]
+const ROUTES = [];
 
 export default ROUTES;

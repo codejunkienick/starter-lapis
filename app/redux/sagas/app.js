@@ -10,6 +10,4 @@ import {
 
 import { app } from 'data';
 
-
-export default function* root() {
-}
+export default function* root() {}

@@ -10,7 +10,7 @@ export function createType(reducer: string, base: string): string {
 }
 
 export function createRequestTypes(reducer: string, base: string): AsyncAction {
-  return [ REQUEST, SUCCESS, FAILURE ].reduce(
+  return [REQUEST, SUCCESS, FAILURE].reduce(
     (acc, type) => {
       acc[type] = `${createType(reducer, base)}_${type}`;
       return acc;

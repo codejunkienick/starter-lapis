@@ -8,10 +8,12 @@ export default (state = initialState, action) => {
     return state.merge({
       locationBeforeTransitions: action.payload,
       prevLocation: state ? state.get('locationBeforeTransitions') : null,
-      locationChanged: state &&
-        state.get('locationBeforeTransitions') &&
-        state.get('locationBeforeTransitions').get('pathname') !==
-          action.payload.pathname,
+      locationChanged: (
+        state &&
+          state.get('locationBeforeTransitions') &&
+          state.get('locationBeforeTransitions').get('pathname') !==
+            action.payload.pathname
+      ),
     });
   }
 

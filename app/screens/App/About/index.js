@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
 
-export default function Home() {
+export default function About() {
   return (
     <div styleName="container">
-      <h1 styleName="header">HOME</h1>
+      <h1 styleName="header">About</h1>
     </div>
   );
 }

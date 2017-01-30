@@ -1,14 +1,16 @@
 // @flow
 import React, { Component, PropTypes } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
-import './index.css';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import FontFaceObserver from 'fontfaceobserver';
-import config from '../../config';
+import { Route, Link } from 'react-router-dom';
+
+import './index.css';
+import config from 'config';
 import { actions } from 'redux/actions/app';
-import { Route, Link } from 'react-router-dom'
-import Home from './Home';
+import About from './About';
+import Projects from './Projects';
+import { NavLink, Header, Navigation } from 'core';
 
 class App extends Component {
   componentWillMount() {
@@ -31,30 +33,27 @@ class App extends Component {
       <div styleName="app-wrap">
         <Helmet {...config.app.head} />
         <div styleName="app">
-          { connectionError &&
-              <div styleName="connection-error">
-                <span>
-                  Вы не в сети
-                </span>
-              </div>
-          }
-          <header styleName="header-landing">
-            <Link to="/" styleName="logo">
-              Starter Lapis
-            </Link>
-          </header>
-          <div styleName="navigation">
-          </div>
+          {connectionError &&
+            <div styleName="connection-error">
+              <span>
+                Вы не в сети
+              </span>
+            </div>}
+          <Header />
+          <Navigation
+            links={[
+              { to: '/', text: 'About' },
+              { to: '/projects', text: 'Projects' },
+            ]}
+          />
           <div styleName="appContent">
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={About} />
+            <Route path="/about" component={About} />
+            <Route path="/projects" component={Projects} />
           </div>
         </div>
       </div>
     );
   }
 }
-export default connect(
-  (state, ownProps) => ({
-
-  }),
-)(App)
+export default connect((state, ownProps) => ({}))(App);

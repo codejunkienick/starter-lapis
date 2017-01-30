@@ -7,7 +7,7 @@ import rootSaga from './sagas';
 export default function createStore(data: Object = {}) {
   // Sync dispatched route actions to the history
   const sagaMiddleware = createSagaMiddleware();
-  const middleware = [ sagaMiddleware ];
+  const middleware = [sagaMiddleware];
 
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
@@ -30,9 +30,8 @@ export default function createStore(data: Object = {}) {
   const store = finalCreateStore(reducer, Immutable.fromJS(data));
 
   // Object.values(sagas).forEach(saga => sagaMiddleware.run(user));
-  sagaMiddleware.run(rootSaga).done.catch(
-    err => console.log('[SAGA-ERROR]', err),
-  );
+  sagaMiddleware.run(rootSaga).done.catch(err =>
+    console.log('[SAGA-ERROR]', err));
 
   if (__DEVELOPMENT__ && module.hot) {
     module.hot.accept('./reducers/index', () => {
