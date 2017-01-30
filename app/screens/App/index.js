@@ -12,6 +12,9 @@ import { NavLink, Header, Navigation } from 'core';
 import { About, Projects } from "./screens";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.load();
+  }
   componentWillMount() {
     this.loadFonts();
   }
@@ -27,17 +30,16 @@ class App extends Component {
   }
 
   render() {
-    const { connectionError, location } = this.props;
+    const { connectionError, testMsg } = this.props;
     return (
       <div styleName="app-wrap">
         <Helmet {...config.app.head} />
         <div styleName="app">
-          {connectionError &&
-            <div styleName="connection-error">
-              <span>
-                Вы не в сети
-              </span>
-            </div>}
+          { testMsg && (
+            <div>
+              { testMsg }
+            </div>
+          )}
           <Header />
           <Navigation
             links={[
@@ -55,4 +57,7 @@ class App extends Component {
     );
   }
 }
-export default connect((state, ownProps) => ({}))(App);
+export default connect(
+  (state, ownProps) => ({ testMsg: state.getIn(['app', 'testMsg']) }),
+  { ...actions }
+)(App);

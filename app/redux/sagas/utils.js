@@ -11,31 +11,23 @@ import { haveConnectionError } from 'redux/reducers/app';
 
 import { fromJS } from 'immutable';
 
-export function* callApi(apiFn, actionData, actionType) {
+export function* callApi({apiFn, actionData, actionType}) {
   try {
     const { data, msg, error, url } = yield call(apiFn, actionData);
-    try {
-      if (data) {
-        if (actionType.SUCCESS) {
-          yield put({ type: actionType.SUCCESS, response: fromJS(data) });
-        }
-        if (msg) yield put({ type: SERVER_NOTIFICATION, msg });
-      } else {
-        if (actionType.FAILURE) {
-          yield put({ type: actionType.FAILURE, error });
-        }
-        if (msg) yield put({ type: SERVER_ERROR, msg });
+    if (data) {
+      if (actionType.SUCCESS) {
+        yield put({ type: actionType.SUCCESS, response: fromJS(data) });
       }
-      if (url) {
-        yield put(push(url));
+      if (msg) yield put({ type: SERVER_NOTIFICATION, msg });
+    } else {
+      if (actionType.FAILURE) {
+        yield put({ type: actionType.FAILURE, error });
       }
-      if (yield select(haveConnectionError)) {
-        yield put({ type: CLEAR_CONNECTION_ERROR });
-      }
-    } catch (err) {
-      console.error('[SAGA]', error);
+      if (msg) yield put({ type: SERVER_ERROR, msg });
     }
-    yield put({ type: CLEAR_CONNECTION_ERROR });
+    // if (yield select(haveConnectionError)) {
+    //   yield put({ type: CLEAR_CONNECTION_ERROR });
+    // }
   } catch (error) {
     if (error) {
       console.log(error);

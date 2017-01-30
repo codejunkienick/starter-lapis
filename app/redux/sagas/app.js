@@ -1,13 +1,19 @@
 // @flow weak
-import { takeLatest } from 'redux-saga';
-import { put, fork, call, select } from 'redux-saga/effects';
+import { takeLatest, put, fork, call, select } from 'redux-saga/effects';
 import {
-  UPLOAD_FILE,
-  CONNECTION_ERROR,
-  UPLOAD_FILES,
-  UPLOAD_MORE_FILES,
+  LOAD
 } from 'redux/actions/app';
 
 import { app } from 'data';
+import { callApi } from './utils';
 
-export default function* root() {}
+export function* loadAsync() {
+  yield callApi({
+    apiFn: app.load,
+    actionType: LOAD
+  })
+}
+
+export default function* root() {
+  yield fork(takeLatest, LOAD.REQUEST, loadAsync);
+}

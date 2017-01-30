@@ -1,5 +1,6 @@
+import apiClient from './apiClient'
 export default {
   load(docName) {
-    return api.get('/app/load');
+    return apiClient.get('/app/load');
   },
 };
