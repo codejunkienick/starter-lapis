@@ -8,8 +8,10 @@ import { Route, Link } from 'react-router-dom';
 import './index.css';
 import config from 'config';
 import { actions } from 'redux/actions/app';
-import { NavLink, Header, Navigation } from 'core';
+import { NavLink } from 'core';
+import { Header, Navigation } from './components';
 import { About, Projects } from "./screens";
+
 
 class App extends Component {
   componentDidMount() {

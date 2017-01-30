@@ -42,51 +42,16 @@ const fields = [
   { name: 'files', maxCount: 8  },
   { name: 'file', maxCount: 1 },
 ];
-app.post('/public/file/upload', upload.fields(fields), function (req, res, next) {
-  if (req.files['file'] && req.files['file'][0]) {
-    console.log('single upload');
-    res.json({
-      "_id":{"$id":"5805d994eba058b874802cab"},
-      "png": '/uploads/' + req.files['file'][0].filename,
-      "size":202687,
-      "name":"\u0421\u043d\u0438\u043c\u043e\u043a \u044d\u043a\u0440\u0430\u043d\u0430 \u043e\u0442 2016-09-19 19-32-08.png",
-      "compileId":false,
-      "originalFormat": "png",
-      "sizes":{
-        "50x50": 'uploads/' + req.files['file'][0].filename,
-        "100x100": 'uploads/' + req.files['file'][0].filename,
-        "150x213": 'uploads/' + req.files['file'][0].filename,
-        "300x300": 'uploads/' + req.files['file'][0].filename,
-        "500x500": 'uploads/' + req.files['file'][0].filename
-      },
-      "original":false
-    });
-  }
-  if (req.files['files']) {
-    console.log(req.files['files']);
-    res.json([{
-      "_id":{"$id":"5805d994eba058b874802cab"},
-      "png": '/uploads/' + req.files['files'][0].filename,
-      "size":202687,
-      "name":"\u0421\u043d\u0438\u043c\u043e\u043a \u044d\u043a\u0440\u0430\u043d\u0430 \u043e\u0442 2016-09-19 19-32-08.png",
-      "compileId":false,
-      "originalFormat": "png",
-      "sizes":{
-        "50x50": '/uploads/' + req.files['files'][0].filename,
-        "100x100": '/uploads/' + req.files['files'][0].filename,
-        "150x213": '/uploads/' + req.files['files'][0].filename,
-        "300x300": '/uploads/' + req.files['files'][0].filename,
-        "500x500": '/uploads/' + req.files['files'][0].filename
-      },
-      "original":false
-    }]);
-  }
+
+app.get('/app/load', (req, res) => {
+  res.json({
+    data: {
+      testMsg: 'This came from server'
+    }
+  })
 })
 
 
-
-// Setup routes
-//Object.keys(routes).forEach((route) => app.use('/' + route + '/', routes[route]));
 
 // Log errors
 app.use((err, req, res, next) => {
