@@ -7,7 +7,7 @@ const Navigation = ({ links, className }) => (
   <nav className={className} styleName="navigation">
     <ul styleName="links">
       {links.map(link => (
-        <li styleName="link-wrap">
+        <li key={link.to} styleName="link-wrap">
           <NavLink styleName="link" to={link.to}>{link.text}</NavLink>
         </li>
       ))}

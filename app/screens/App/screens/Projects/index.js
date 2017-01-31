@@ -1,15 +1,17 @@
 import React from 'react';
-import './index.css';
+
+import { NavLink, AppearRoute } from 'core';
 import { SideProjects } from './screens';
-import { NavLink } from 'core';
-import { Route } from 'react-router';
+import './index.css';
 
 const Projects = ({ match }) => (
   <div>
     <h2>Projects</h2>
     <NavLink to={`${match.url}/side`}>to SideProjects</NavLink>
-    <Route path={`${match.url}/side`} component={SideProjects} />
+    <div style={{paddingBottom: 40}} />
+    <AppearRoute path={`${match.url}/side`} component={SideProjects} />
   </div>
 );
+
 
 export default Projects;
