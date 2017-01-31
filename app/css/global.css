@@ -18,7 +18,7 @@ html {
 body {
   background-color: rgb(253, 253, 253);
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   font-family: var(--body-font-family);
   color: #000;
   height: 100%;
@@ -67,7 +67,6 @@ h3 {
   margin-top: 0;
   margin-bottom: 28px;
   font-size: 24px;
-  letter-spacing: -0.5px;
 }
 p { 
   margin-top: 0;
@@ -191,7 +190,3 @@ input::-webkit-contacts-auto-fill-button {
   right: 0;
 }
 
-:root {
-  --width: 800px;
-  --content-width: 700px;
-}

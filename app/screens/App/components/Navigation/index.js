@@ -3,11 +3,15 @@ import React from 'react';
 import './index.css';
 import { NavLink } from 'core';
 
-const Navigation = ({ links }) => {
+const Navigation = ({ links, className }) => {
   return (
-    <div styleName="navigation">
-      {links.map(link => <NavLink to={link.to}>{link.text}</NavLink>)}
-    </div>
+    <nav className={className} styleName="navigation">
+      <ul styleName="links">
+        {links.map(link => (
+          <li styleName="link-wrap"><NavLink styleName="link" to={link.to}>{link.text}</NavLink></li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 

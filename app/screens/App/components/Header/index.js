@@ -5,8 +5,8 @@ import { NavLink } from 'core';
 const Header = ({}) => {
   return (
     <div styleName="header">
-      <NavLink to="/">
-        StarterLapis
+      <NavLink styleName="logo" to="/">
+        Starter Lapis
       </NavLink>
     </div>
   );

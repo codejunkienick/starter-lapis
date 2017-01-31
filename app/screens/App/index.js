@@ -34,25 +34,23 @@ class App extends Component {
   render() {
     const { connectionError, testMsg } = this.props;
     return (
-      <div styleName="app-wrap">
+      <div styleName="wrapper">
         <Helmet {...config.app.head} />
         <div styleName="app">
-          { testMsg && (
-            <div>
-              { testMsg }
-            </div>
-          )}
           <Header />
-          <Navigation
-            links={[
-              { to: '/', text: 'About' },
-              { to: '/projects', text: 'Projects' },
-            ]}
-          />
-          <div styleName="appContent">
-            <Route exact path="/" component={About} />
-            <Route path="/about" component={About} />
-            <Route path="/projects" component={Projects} />
+          <div styleName="content">
+            <Navigation
+              styleName="navigation"
+              links={[
+                { to: '/', text: 'About' },
+                { to: '/projects', text: 'Projects' },
+              ]}
+            />
+            <div styleName="routes">
+              <Route exact path="/" component={About} />
+              <Route path="/about" component={About} />
+              <Route path="/projects" component={Projects} />
+            </div>
           </div>
         </div>
       </div>

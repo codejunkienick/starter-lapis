@@ -1,3 +1,16 @@
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
 
+.logo {
+  display: inline-block;
+  padding: 24px 60px;
+  background: #26619c;
+  color: #fff;
+  font-size: 56px;
+  font-weight: bold;
+  font-style: italic;
 }
