@@ -8,10 +8,10 @@ import http from 'http';
 import config from './config';
 import Html from './Html';
 import createStore from './redux/createStore';
-import React from 'react'
-import ReactDOMServer from 'react-dom/server'
-import { StaticRouter } from 'react-router'
-import ServerTemplate from './ServerTemplate'
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { StaticRouter } from 'react-router';
+import ServerTemplate from './ServerTemplate';
 import { Provider } from 'react-redux';
 
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
@@ -78,7 +78,7 @@ app.use((req, res) => {
     return;
   }
 
-  const context = {}
+  const context = {};
   const component = (
     <Provider store={store} key="provider">
       <StaticRouter location={req.url} context={context}>
@@ -97,10 +97,10 @@ app.use((req, res) => {
   if (context.url) {
     res.writeHead(302, {
       Location: context.url
-    })
-    res.end()
+    });
+    res.end();
   } else {
-    res.send('<!doctype html>\n' + html)
+    res.send('<!doctype html>\n' + html);
   }
 });
 

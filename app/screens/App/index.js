@@ -1,38 +1,36 @@
 // @flow
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import FontFaceObserver from 'fontfaceobserver';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
-import './index.css';
 import config from 'config';
 import { actions } from 'redux/actions/app';
-import { NavLink } from 'core';
+import './index.css';
 import { Header, Navigation } from './components';
-import { About, Projects } from "./screens";
+import { About, Projects } from './screens';
 
+function loadFonts() {
+  const roboto = new FontFaceObserver('Roboto');
 
+  Promise.all([roboto.load()]).then(() => {
+    document.body.className += ' fonts-loaded';
+  });
+}
 class App extends Component {
   componentDidMount() {
     this.props.load();
   }
   componentWillMount() {
-    this.loadFonts();
+    loadFonts();
   }
 
   // Observe loading and set proper styles when fonts have loaded
   // Fonts are added inside global.css
-  loadFonts() {
-    const roboto = new FontFaceObserver('Roboto');
-
-    Promise.all([roboto.load()]).then(() => {
-      document.body.className += ' fonts-loaded';
-    });
-  }
 
   render() {
-    const { connectionError, testMsg } = this.props;
+    const { testMsg } = this.props;
     return (
       <div styleName="wrapper">
         <Helmet {...config.app.head} />
@@ -58,6 +56,6 @@ class App extends Component {
   }
 }
 export default connect(
-  (state, ownProps) => ({ testMsg: state.getIn(['app', 'testMsg']) }),
-  { ...actions }
+  state => ({ testMsg: state.getIn(['app', 'testMsg']) }),
+  { ...actions },
 )(App);

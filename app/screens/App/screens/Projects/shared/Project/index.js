@@ -1,13 +1,11 @@
-import React from "react";
-import { Paragraph, Title } from "core";
+import React from 'react';
+import { Paragraph, Title } from 'core';
 
-const Project = ({title, content}) => {
-  return (
-    <div>
-      <Title>{title}</Title>
-      <Paragraph>{content}</Paragraph>
-    </div>
-  );
-}
+const Project = ({ title, content }) => (
+  <div>
+    <Title>{title}</Title>
+    <Paragraph>{content}</Paragraph>
+  </div>
+);
 
 export default Project;

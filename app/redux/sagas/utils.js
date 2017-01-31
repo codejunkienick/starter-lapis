@@ -11,7 +11,7 @@ import { haveConnectionError } from 'redux/reducers/app';
 
 import { fromJS } from 'immutable';
 
-export function* callApi({apiFn, actionData, actionType}) {
+export function* callApi({ apiFn, actionData, actionType }) {
   try {
     const { data, msg, error, url } = yield call(apiFn, actionData);
     if (data) {

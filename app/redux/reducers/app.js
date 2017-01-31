@@ -10,7 +10,7 @@ export default function app(state: Object = initialState, action: Object = {}) {
   const uuid = guid();
   switch (action.type) {
     case TYPES.LOAD.SUCCESS:
-      return state.merge(response)
+      return state.merge(response);
 
     default:
       return state;

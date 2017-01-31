@@ -1,1 +1,1 @@
-export app from './app'
+export app from './app';

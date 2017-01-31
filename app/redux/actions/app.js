@@ -24,8 +24,6 @@ const hideNotification = (notificationId: string) =>
   action(HIDE_NOTIFICATION, { notificationId });
 const clearConnectionError = () => action(CLEAR_CONNECTION_ERROR);
 
-const load = () => action(LOAD.REQUEST)
+const load = () => action(LOAD.REQUEST);
 
-export const actions = {
-  load
-};
+export const actions = { load };

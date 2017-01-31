@@ -5,13 +5,9 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import ClientTemplate from './ClientTemplate';
-import { Provider } from 'react-redux';
-import { syncHistoryWithStore } from 'react-router-redux';
-import createStore from './redux/createStore';
-// import Reactotron from 'reactotron-react-js'
-import io from 'socket.io-client';
 import Redbox from 'redbox-react';
+import ClientTemplate from './ClientTemplate';
+import createStore from './redux/createStore';
 
 const consoleErrorReporter = ({ error }) => {
   console.error(error);
@@ -25,12 +21,12 @@ consoleErrorReporter.propTypes = {
 const dest = document.getElementById('content');
 const store = createStore(window.reduxState);
 
-// Remove redbox 
+// Remove redbox
 delete AppContainer.prototype.unstable_handleError; // FIXME;
 
 ReactDOM.render(
   <AppContainer>
-    <ClientTemplate store={store}/>
+    <ClientTemplate store={store} />
   </AppContainer>,
   dest
 );
@@ -49,9 +45,12 @@ if (module && module.hot) {
 
 
 if (process.env.NODE_ENV !== 'production') {
-
   window.React = React; // enable debugger
-
-  if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
-  }
+  // if (
+  //   !dest ||
+  //     !dest.firstChild ||
+  //     !dest.firstChild.attributes ||
+  //     !dest.firstChild.attributes['data-react-checksum']
+  // ) {
+  // }
 }
