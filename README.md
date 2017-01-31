@@ -57,7 +57,7 @@ app
 │       │   │   │       ├── index.js
 │       │   │   │       └── styles.css
 │       │   │   ├── index.js
-│       │   │   └── styles.css
+│       │   │   └── index.css
 │       │   └── Course
 │       │       ├── screens
 │       │       │   └── Assignments
@@ -101,10 +101,10 @@ app
 - [x] Client side rendering
 - [x] Server-side rendering
 - [ ] Code splitting with System.import()
-- [ ] Transitions between routes
+- [x] Transitions between routes
 - [x] Rewrite production config in ES6
 - [ ] Intgrate happypack
-- [ ] Integrate jest for testing
+- [x] Integrate jest for testing
 - [ ] Add basic auth example with api and react-router
 - [ ] Write test examples
 - [ ] Integrate with Flow

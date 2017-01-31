@@ -51,7 +51,14 @@ app.get('/app/load', (req, res) => {
   })
 })
 
-
+app.post('/user/login', (req, res) => {
+  setTimeout(
+    function() {
+      res.json({ data: true });
+    },
+    2000
+  );
+});
 
 // Log errors
 app.use((err, req, res, next) => {

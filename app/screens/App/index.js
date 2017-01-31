@@ -7,9 +7,10 @@ import { Route } from 'react-router-dom';
 
 import config from 'config';
 import { actions } from 'redux/actions/app';
+import { actions as userActions } from 'redux/actions/user';
 import './index.css';
 import { Header, Navigation } from './components';
-import { About, Projects } from './screens';
+import { About, Projects, Home } from './screens';
 
 function loadFonts() {
   const roboto = new FontFaceObserver('Roboto');
@@ -23,11 +24,10 @@ class App extends Component {
     this.props.load();
   }
   componentWillMount() {
+    // Observe loading and set proper styles when fonts have loaded
+    // Fonts are added inside global.css
     loadFonts();
   }
-
-  // Observe loading and set proper styles when fonts have loaded
-  // Fonts are added inside global.css
 
   render() {
     const { testMsg } = this.props;
@@ -40,12 +40,13 @@ class App extends Component {
             <Navigation
               styleName="navigation"
               links={[
-                { to: '/', text: 'About' },
+                { to: '/', text: 'Home' },
+                { to: '/about', text: 'About' },
                 { to: '/projects', text: 'Projects' },
               ]}
             />
             <div styleName="routes">
-              <Route exact path="/" component={About} />
+              <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
               <Route path="/projects" component={Projects} />
             </div>
