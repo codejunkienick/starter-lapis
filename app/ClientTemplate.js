@@ -9,11 +9,10 @@ import { App } from 'screens';
 
 export default class ClientTemplate extends React.Component {
   render() {
-    const { store} = this.props;
+    const { store } = this.props;
     return (
       <Provider store={store} key="provider">
-        <BrowserRouter
-        >
+        <BrowserRouter>
           <App />
         </BrowserRouter>
       </Provider>

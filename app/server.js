@@ -11,6 +11,8 @@ import createStore from './redux/create';
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
+import ServerTemplate from './ServerTemplate'
+import { Provider } from 'react-redux';
 
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 const pretty = new PrettyError();
@@ -69,17 +71,42 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
   const store = createStore();
+
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
       ReactDOMServer.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />));
   }
-  hydrateOnClient();
-  return;
 
-  // if (__DISABLE_SSR__) {
-  //   hydrateOnClient();
-  //   return;
-  // }
+  if (__DISABLE_SSR__) {
+    hydrateOnClient();
+    return;
+  }
+
+  const context = {}
+  const component = (
+    <Provider store={store} key="provider">
+      <StaticRouter location={req.url} context={context}>
+        <ServerTemplate />
+      </StaticRouter>
+    </Provider>
+  );
+  const html = ReactDOM.renderToString(
+    <Html
+      assets={webpackIsomorphicTools.assets()}
+      component={component}
+      store={store}
+    />
+  );
+
+  if (context.url) {
+    res.writeHead(302, {
+      Location: context.url
+    })
+    res.end()
+  } else {
+    res.write(html)
+    res.end()
+  }
 });
 
 if (config.port) {

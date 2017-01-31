@@ -60,8 +60,14 @@ export default class Html extends Component {
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
           <script dangerouslySetInnerHTML={{ __html: `window.reduxState=${serialize(store.getState())};` }} charSet="UTF-8" />
           <script src={assets.javascript.main} defer="true" charSet="UTF-8" />
-          <script src={assets.javascript.vendor} charSet="UTF-8" />
-          <script src="http://localhost:3001/dist/app.js" charSet="UTF-8" />
+          {
+            global.__DEVELOPMENT__ &&
+              <script src={assets.javascript.vendor} charSet="UTF-8" />
+          }
+          {
+            global.__DEVELOPMENT__ &&
+              <script src="http://localhost:3001/dist/app.js" charSet="UTF-8" />
+          }
         </body>
       </html>
     );
