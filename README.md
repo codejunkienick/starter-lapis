@@ -19,6 +19,7 @@ Cutting edge starter kit optimized for development and production using latest t
 * [babel-plugin-react-css-modules]() for better integration with css-modules without significant performance drop.
 * [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) to allow require() work for statics both on client and server
 * [webpack-dashboard]() for NASA style debugging
+* [hard-source-webpack-plugin](https://github.com/mzgoddard/hard-source-webpack-plugin) to speed up initial build time
 * [axios](https://github.com/mzabriskie/axios) for handling XHR calls. 
 
 ## Structure
