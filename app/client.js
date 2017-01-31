@@ -8,7 +8,7 @@ import { AppContainer } from 'react-hot-loader';
 import ClientTemplate from './ClientTemplate';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
-import createStore from './redux/create';
+import createStore from './redux/createStore';
 // import Reactotron from 'reactotron-react-js'
 import io from 'socket.io-client';
 import Redbox from 'redbox-react';

@@ -7,7 +7,7 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import config from './config';
 import Html from './Html';
-import createStore from './redux/create';
+import createStore from './redux/createStore';
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
@@ -37,10 +37,6 @@ app.use(Express.static(path.join(__dirname, '..', 'static')));
 // Proxy to API server
 app.use('/api', (req, res) => {
   proxy.web(req, res, { target: targetUrl });
-});
-
-app.use('/public', (req, res) => {
-  proxy.web(req, res, { target: `${targetUrl}/public` });
 });
 
 app.use('/ws', (req, res) => {
@@ -104,8 +100,7 @@ app.use((req, res) => {
     })
     res.end()
   } else {
-    res.write(html)
-    res.end()
+    res.send('<!doctype html>\n' + html)
   }
 });
 
