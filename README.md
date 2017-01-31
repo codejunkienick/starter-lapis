@@ -1,5 +1,7 @@
 # LAPIS
 
+Cutting edge starter kit optimized for development and production using latest tools available. 
+
 ## Featuress
 * [React](https://github.com/facebook/react)
 * [React Router@v4](https://github.com/ReactTraining/react-router/tree/v4) beta version
@@ -102,6 +104,7 @@ app
 - [x] Rewrite production config in ES6
 - [ ] Intgrate happypack
 - [ ] Integrate jest for testing
+- [ ] Add basic auth example with api and react-router
 - [ ] Write test examples
 
 ## How to?
