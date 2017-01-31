@@ -96,12 +96,13 @@ app
 ## TODO
 - [x] Basic route configuration
 - [x] Client side rendering
-- [ ] Server-side rendering
+- [x] Server-side rendering
 - [ ] Code splitting with System.import()
 - [ ] Transitions between routes
-- [ ] Rewrite production config in ES6
+- [x] Rewrite production config in ES6
 - [ ] Intgrate happypack
-- [ ] ...
+- [ ] Integrate jest for testing
+- [ ] Write test examples
 
 
 ## Installation
@@ -126,3 +127,8 @@ npm run dev-dash
 npm run build
 npm run start
 ```
+
+### Thanks
+
+Thanks to erikas for providing starting ground for my react learning. 
+This starter resembles some code and a bit of structure from now outdated [erikas's starter kit](https://github.com/erikras/react-redux-universal-hot-example)
