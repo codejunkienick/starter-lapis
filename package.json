@@ -83,7 +83,7 @@
       }
     },
     "build": {
-      "command": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+      "command": "babel-node ./node_modules/webpack/bin/webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
       "env": {
         "NODE_ENV": "production"
       }
