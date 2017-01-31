@@ -31,8 +31,7 @@
     "dev-dash": "webpack-dashboard -c magenta -m -- concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
     "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
     "dev-dll": "babel-node ./node_modules/.bin/webpack --colors --progress --config webpack/dll.config.js",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "jest"
   },
   "betterScripts": {
     "start-prod": {
@@ -138,10 +137,10 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
-    "@kadira/storybook": "^2.34.0",
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
+    "babel-jest": "^18.0.0",
     "babel-loader": "^6.2.9",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-syntax-flow": "^6.18.0",
@@ -159,6 +158,7 @@
     "clean-webpack-plugin": "^0.1.15",
     "concurrently": "^3.0.0",
     "css-loader": "^0.26.1",
+    "enzyme": "^2.7.1",
     "eslint": "^3.14.1",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-loader": "^1.6.1",
@@ -169,6 +169,7 @@
     "extract-text-webpack-plugin": "2.0.0-rc.0",
     "html-webpack-plugin": "^2.28.0",
     "image-webpack-loader": "^3.2.0",
+    "jest": "^18.1.0",
     "json-loader": "^0.5.4",
     "node-sass": "^4.4.0",
     "postcss": "^5.2.11",
