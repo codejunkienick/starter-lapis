@@ -11,17 +11,13 @@
   -webkit-font-smoothing: antialiased;
 }
 html {
-  height: 100%;
   box-sizing: border-box;
 }
 
 body {
-  background-color: rgb(253, 253, 253);
-  font-weight: 400;
   font-size: 16px;
   font-family: var(--body-font-family);
-  color: #000;
-  height: 100%;
+  color: #222;
 
   :global &.fonts-loaded {
     font-family: var(--body-font-family-loaded);
@@ -35,23 +31,6 @@ form {
   &:focus {
     outline: none;
   }
-}
-
-textarea {
-  line-height: 1.57;
-} 
-
-input {
-  line-height: 1;
-}
-
-input, textarea, select, button {
-  font-family: var(--body-font-family);
-  :global &.fonts-loaded {
-    font-family: var(--body-font-family-loaded);
-    font-weight: 400;
-  }
-
 }
 
 h1,h2,h3,h4,h5,h6 {

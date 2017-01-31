@@ -107,6 +107,7 @@ app
 - [ ] Integrate jest for testing
 - [ ] Add basic auth example with api and react-router
 - [ ] Write test examples
+- [ ] Integrate with Flow
 
 ## How to?
 
