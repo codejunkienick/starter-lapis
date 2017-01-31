@@ -21,7 +21,7 @@
 
 ## Structure
 * __client.js__ entry point for client rendering
-* __server.js__ entry point for server rendering. **SSR IS NOT IMPLEMENTED YET**
+* __server.js__ entry point for server rendering.
 * __Html.js__ boilerplate html for clientside rendering and serverside rendering.
 * __data__ folder is for anything related to handling api requests. index.js exports functions that return api calls wrapped in Promises. Right now **axios** is used for api client.
 * __config__ folder is for configuration of client app. 
@@ -103,6 +103,12 @@ app
 - [ ] Intgrate happypack
 - [ ] Integrate jest for testing
 - [ ] Write test examples
+
+## How to?
+
+### How to enable/disable SSR
+
+Check bin/server.js executable. and change __DISABLE_SSR__ variable.
 
 
 ## Installation
