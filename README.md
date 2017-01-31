@@ -2,7 +2,7 @@
 
 Cutting edge starter kit optimized for development and production using latest tools available. 
 
-## Featuress
+## Features
 * [React](https://github.com/facebook/react)
 * [React Router@v4](https://github.com/ReactTraining/react-router/tree/v4) beta version
 * [Webpack@2.2](http://webpack.github.io) for bundling
@@ -111,7 +111,7 @@ app
 
 ### How to enable/disable SSR
 
-Check bin/server.js executable. and change __DISABLE_SSR__ variable.
+Check bin/server.js executable and change __DISABLE_SSR__ variable.
 
 
 ## Installation
