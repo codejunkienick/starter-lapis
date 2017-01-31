@@ -103,7 +103,7 @@ app
 - [ ] Code splitting with System.import()
 - [x] Transitions between routes
 - [x] Rewrite production config in ES6
-- [ ] Intgrate happypack
+- [ ] Integrate happypack
 - [x] Integrate jest for testing
 - [ ] Add basic auth example with api and react-router
 - [ ] Write test examples
