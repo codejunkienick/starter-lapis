@@ -6,19 +6,26 @@ import './index.css';
 
 type Props = {
   login: ReduxAction,
+  loading: boolean,
+  loaded: boolean,
   isAuthenticated: boolean,
 }
 
-const Home = ({ login, isAuthenticated }: Props) => {
+const Home = ({ login, loading, isAuthenticated }: Props) => {
   return (
     <div styleName="container">
       <h2 styleName="header">Home</h2>
+      { loading && (
+        <div>
+          Loading...
+        </div>
+      )}
       { isAuthenticated && (
         <div>
           You are now logged in!
         </div>
       )}
-      {!isAuthenticated && (
+      {!isAuthenticated && !loading && (
         <div>
           If you wanna be authenticated just click a btn!
           <br />
@@ -34,7 +41,8 @@ const Home = ({ login, isAuthenticated }: Props) => {
 export default connect(
   state => ({
     loading: state.getIn(['user', 'loading']),
-    isAuthenticated: state.getIn(['user', 'authenticated'])
+    isAuthenticated: state.getIn(['user', 'authenticated']),
+    loaded: state.getIn(['user', 'loaded']),
   }),
   { login: actions.login }
 )(Home);
