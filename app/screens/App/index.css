@@ -22,9 +22,8 @@
 }
 
 .navigation {
-  flex: 200px;
+  flex: 120px;
   flex-shrink: 0;
-  margin-right: 80px;
 }
 
 .connection-error {
