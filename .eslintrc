@@ -15,7 +15,6 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-multi-comp": 0,
     "import/default": 0,
-    "import/no-duplicates": 0,
     "import/named": 0,
     "import/namespace": 0,
     "import/extensions": 0,
@@ -29,7 +28,21 @@
     "no-console": 0,
     "no-alert": 0,
     "prefer-template": 0,
-    "max-len": [2, {"code": 150, "tabWidth": 2, "ignoreUrls": true}]  
+    "max-len": [2, {"code": 150, "tabWidth": 2, "ignoreUrls": true}],
+    "space-infix-ops": 0,
+    "no-duplicate-imports": 0,
+    "import/no-duplicates": 1,
+    "flowtype/define-flow-type": 1,
+    "flowtype/space-before-type-colon": [
+      1,
+    "never"
+    ],
+    "flowtype/use-flow-type": 1,
+    "flowtype/valid-syntax": 1,
+    "flowtype/type-id-match": [
+      2,
+    "^([A-Z]+[a-z0-9A-Z]*)$"
+    ]
   },
   "plugins": [
     "react", 

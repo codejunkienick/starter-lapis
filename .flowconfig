@@ -1,25 +1,35 @@
 [ignore]
 .*node_modules/fbjs.*
 .*node_modules/systemjs-builder/test/fixtures/sourcemaps-expectations/.*
-.*/node_modules/react-motion/src/.*
+.*/node_modules/.*/test/.*
+.*/node_modules/flow-runtime/.*
+.*/node_modules/babel-plugin-flow-runtime/.*
 
 [include]
+.*/app/.*
 
 [libs]
 flow/declarations/
 
 [options]
-module.name_mapper='^components\(.*\)$' -> '<PROJECT_ROOT>/app/components/\1'
-module.name_mapper='^containers\(.*\)$' -> '<PROJECT_ROOT>/app/containers/\1'
+module.name_mapper='^core\(.*\)$' -> '<PROJECT_ROOT>/app/core/\1'
+module.name_mapper='^config\(.*\)$' -> '<PROJECT_ROOT>/app/config/\1'
+module.name_mapper='^screens\(.*\)$' -> '<PROJECT_ROOT>/app/screens/\1'
+module.name_mapper='^data\(.*\)$' -> '<PROJECT_ROOT>/app/data/\1'
 module.name_mapper='^css\(.*\)$' -> '<PROJECT_ROOT>/app/css/\1'
 module.name_mapper='^redux\(.*\)$' -> '<PROJECT_ROOT>/app/redux/\1'
-module.name_mapper='^types\(.*\)$' -> '<PROJECT_ROOT>/app/types/\1'
-module.name_mapper='^services\(.*\)$' -> '<PROJECT_ROOT>/app/services/\1'
-module.name_mapper='^utils\(.*\)$' -> '<PROJECT_ROOT>/app/utils/\1'
-module.name_mapper='^assets\(.*\)$' -> '<PROJECT_ROOT>/app/assets/\1'
+module.name_mapper='^redux-saga/effects$' -> '<PROJECT_ROOT>/node_modules/redux-saga/effects/\1'
 module.name_mapper='^constants.js$' -> '<PROJECT_ROOT>/app/constants.js'
-module.name_mapper.extension='css' -> '<PROJECT_ROOT>/flow/stub/css-modules.js'
+module.name_mapper='.*\(.css\)' -> 'CSSModule'
+module.system=haste
+strip_root=true
+module.file_ext=.js
+module.file_ext=.json
+module.file_ext=.jsx
+module.file_ext=.css
+module.file_ext=.scss
+
 module.name_mapper='.*\.\(svg\|png\|jpg\|gif\)$' -> '<PROJECT_ROOT>/flow/stub/url-loader.js'
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
-esproposal.decorators=ignore
+

@@ -1,10 +1,15 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'redux/actions/user';
 import './index.css';
 
+type Props = {
+  login: ReduxAction,
+  isAuthenticated: boolean,
+}
 
-const Home = ({ match, login, isAuthenticated }) => {
+const Home = ({ login, isAuthenticated }: Props) => {
   return (
     <div styleName="container">
       <h2 styleName="header">Home</h2>
@@ -16,6 +21,7 @@ const Home = ({ match, login, isAuthenticated }) => {
       {!isAuthenticated && (
         <div>
           If you wanna be authenticated just click a btn!
+          <br />
           <button type="button" onClick={() => login()}>
             Login
           </button>

@@ -1,9 +1,14 @@
 // @flow
 import React from 'react';
-import './index.css';
 import { NavLink } from 'core';
+import './index.css';
 
-const Navigation = ({ links, className }) => (
+type Props = {
+  links: Array<MainNavigationLink>,
+  className: string
+}
+
+const Navigation = ({ links, className }: Props) => (
   <nav className={className} styleName="navigation">
     <ul styleName="links">
       {links.map(link => (
