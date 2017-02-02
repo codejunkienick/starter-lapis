@@ -5,31 +5,21 @@
 .*/node_modules/flow-runtime/.*
 .*/node_modules/babel-plugin-flow-runtime/.*
 
-[include]
-.*/app/.*
-
 [libs]
 flow/declarations/
 
 [options]
+sharedmemory.hash_table_pow=19
 module.name_mapper='^core\(.*\)$' -> '<PROJECT_ROOT>/app/core/\1'
 module.name_mapper='^config\(.*\)$' -> '<PROJECT_ROOT>/app/config/\1'
 module.name_mapper='^screens\(.*\)$' -> '<PROJECT_ROOT>/app/screens/\1'
 module.name_mapper='^data\(.*\)$' -> '<PROJECT_ROOT>/app/data/\1'
 module.name_mapper='^css\(.*\)$' -> '<PROJECT_ROOT>/app/css/\1'
 module.name_mapper='^redux\(.*\)$' -> '<PROJECT_ROOT>/app/redux/\1'
-module.name_mapper='^redux-saga/effects$' -> '<PROJECT_ROOT>/node_modules/redux-saga/effects/\1'
 module.name_mapper='^constants.js$' -> '<PROJECT_ROOT>/app/constants.js'
 module.name_mapper='.*\(.css\)' -> 'CSSModule'
-module.system=haste
-strip_root=true
-module.file_ext=.js
-module.file_ext=.json
-module.file_ext=.jsx
-module.file_ext=.css
-module.file_ext=.scss
-
 module.name_mapper='.*\.\(svg\|png\|jpg\|gif\)$' -> '<PROJECT_ROOT>/flow/stub/url-loader.js'
+strip_root=true
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
 

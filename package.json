@@ -25,6 +25,7 @@
     "start-prod": "better-npm-run start-prod",
     "build": "better-npm-run build",
     "lint": "eslint -c .eslintrc app",
+    "flow": "flow",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
     "watch-client": "better-npm-run watch-client",
