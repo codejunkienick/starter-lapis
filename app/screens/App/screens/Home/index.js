@@ -7,7 +7,6 @@ import './index.css';
 type Props = {
   login: ReduxAction,
   loading: boolean,
-  loaded: boolean,
   isAuthenticated: boolean,
 }
 
@@ -42,7 +41,6 @@ export default connect(
   state => ({
     loading: state.getIn(['user', 'loading']),
     isAuthenticated: state.getIn(['user', 'authenticated']),
-    loaded: state.getIn(['user', 'loaded']),
   }),
   { login: actions.login }
 )(Home);

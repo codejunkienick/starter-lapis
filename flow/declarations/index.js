@@ -19,4 +19,5 @@ declare module CSSModule {
 }
 
 declare type ReduxAction = { type: string; payload: Object };
+declare type ActionCreator = (...args: any) => ReduxAction;
 
