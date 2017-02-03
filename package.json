@@ -41,7 +41,7 @@
       "env": {
         "NODE_PATH": "./app",
         "NODE_ENV": "production",
-        "PORT": 3333,
+        "PORT": 80,
         "APIPORT": 3131,
         "APIHOST": "localhost"
       }
