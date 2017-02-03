@@ -3281,10 +3281,6 @@ flow-bin@^0.38.0:
   version "0.38.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.38.0.tgz#3ae096d401c969cc8b5798253fb82381e2d0237a"
 
-flow-runtime@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/flow-runtime/-/flow-runtime-0.0.6.tgz#570aeab33dca9d2357d137c0b0a2e141b7342410"
-
 follow-redirects@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.0.0.tgz#8e34298cbd2e176f254effec75a1c78cc849fd37"
@@ -3737,9 +3733,9 @@ har-validator@~2.0.6:
     is-my-json-valid "^2.12.4"
     pinkie-promise "^2.0.0"
 
-hard-source-webpack-plugin@^0.3.8:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/hard-source-webpack-plugin/-/hard-source-webpack-plugin-0.3.8.tgz#2d395abe6a444ff935a3b1706de31463707d9af0"
+hard-source-webpack-plugin@^0.3.9:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/hard-source-webpack-plugin/-/hard-source-webpack-plugin-0.3.9.tgz#f291e62109ff94f1999cead81d097fe0b565411a"
   dependencies:
     bluebird "^3.0.0"
     level "^1.4.0"
@@ -5665,9 +5661,9 @@ node-pre-gyp@^0.6.29:
     tar "~2.2.1"
     tar-pack "~3.3.0"
 
-node-sass@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.4.0.tgz#ff08ff2fded2a1d0bee270e8ed1275f7bc9c5a16"
+node-sass@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.5.0.tgz#532e37bad0ce587348c831535dbc98ea4289508b"
   dependencies:
     async-foreach "^0.1.3"
     chalk "^1.1.1"
@@ -7129,12 +7125,12 @@ react-redux@^5.0.2:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
 
-react-router-dom@4.0.0-beta.3:
-  version "4.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.0.0-beta.3.tgz#3b7e98d8b9e03d61acab0fcccaabc1cf1723ce5f"
+react-router-dom@next:
+  version "4.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.0.0-beta.4.tgz#788f26a8cfd2669e6d615380da0ccefb33a941b1"
   dependencies:
     history "^4.5.1"
-    react-router "^4.0.0-beta.3"
+    react-router "^4.0.0-beta.4"
 
 react-router-redux@^4.0.7:
   version "4.0.7"
@@ -7144,11 +7140,12 @@ react-router-server@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-router-server/-/react-router-server-2.0.0.tgz#e3d459e5cf985cd703ce9a982ea42fa8e1aa15b1"
 
-react-router@4.0.0-beta.3, react-router@^4.0.0-beta.3:
-  version "4.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.0.0-beta.3.tgz#3deee9063401b7205f8d9cfe718787f699886975"
+react-router@^4.0.0-beta.4, react-router@next:
+  version "4.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.0.0-beta.4.tgz#6ab21755525ae3dfe7cca5e0176b05385a7b854d"
   dependencies:
     history "^4.5.1"
+    invariant "^2.2.2"
     loose-envify "^1.3.1"
     path-to-regexp "^1.5.3"
     warning "^3.0.0"
@@ -7410,11 +7407,10 @@ redux-form@^6.5.0:
     lodash "^4.17.3"
     lodash-es "^4.17.3"
 
-redux-immutable@^3.0.10:
-  version "3.0.10"
-  resolved "https://registry.yarnpkg.com/redux-immutable/-/redux-immutable-3.0.10.tgz#160c9ebfe59cf3f2fd4ee9baf0017cd56fe54649"
+redux-immutable@^3.0.11:
+  version "3.0.11"
+  resolved "https://registry.yarnpkg.com/redux-immutable/-/redux-immutable-3.0.11.tgz#ba7b00361904f2034e7841741bd4a6be66eea1ac"
   dependencies:
-    flow-runtime "0.0.6"
     immutable "^3.8.1"
 
 redux-saga@^0.14.3:
@@ -8846,18 +8842,18 @@ webpack-dashboard@^0.3.0:
     socket.io "^1.4.8"
     socket.io-client "^1.4.8"
 
-webpack-dev-middleware@^1.4.0, webpack-dev-middleware@^1.8.3:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-1.9.0.tgz#a1c67a3dfd8a5c5d62740aa0babe61758b4c84aa"
+webpack-dev-middleware@^1.10.0, webpack-dev-middleware@^1.4.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-1.10.0.tgz#7d5be2651e692fddfafd8aaed177c16ff51f0eb8"
   dependencies:
     memory-fs "~0.4.1"
     mime "^1.3.4"
     path-is-absolute "^1.0.0"
     range-parser "^1.0.3"
 
-webpack-dev-server@^1.16.2:
-  version "1.16.2"
-  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-1.16.2.tgz#8bebc2c4ce1c45a15c72dd769d9ba08db306a793"
+webpack-dev-server@^1.16.3:
+  version "1.16.3"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-1.16.3.tgz#cbb6a0d3e7c8eb5453b3e9befcbe843219f62661"
   dependencies:
     compression "^1.5.2"
     connect-history-api-fallback "^1.3.0"
