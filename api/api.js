@@ -5,23 +5,25 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import SocketIo from 'socket.io';
-import { logger, middleware as requestMiddleware } from './helpers/logger';
-import handleUserSocket from './ws';
-import config from './config';
 import multer from 'multer';
+import config from './config';
+import handleUserSocket from './ws';
+import { logger, middleware as requestMiddleware } from './helpers/logger';
 
 const app = express();
 const server = new http.Server(app);
 const io = new SocketIo(server);
 
 app.use(cookieParser(config.secret));
-app.use(session({
-  secret: config.secret,
-  key: 'usersid',
-  cookie: { maxAge: 1200000 },
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(
+  session({
+    secret: config.secret,
+    key: 'usersid',
+    cookie: { maxAge: 1200000 },
+    resave: false,
+    saveUninitialized: false
+  })
+);
 //app.use(httpLogger('dev'));
 app.use(requestMiddleware);
 app.use(bodyParser.json());
@@ -30,26 +32,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/static', express.static(config.projectDir + '/public'));
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'static/uploads/')
+  destination: function(req, file, cb) {
+    cb(null, 'static/uploads/');
   },
-  filename: function (req, file, cb) {
-      cb(null, file.originalname);        
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
   }
 });
 const upload = multer({ storage });
-const fields = [
-  { name: 'files', maxCount: 8  },
-  { name: 'file', maxCount: 1 },
-];
+const fields = [{ name: 'files', maxCount: 8 }, { name: 'file', maxCount: 1 }];
 
 app.get('/app/load', (req, res) => {
-  res.json({
-    data: {
-      testMsg: 'This came from server'
-    }
-  })
-})
+  res.json({ data: { testMsg: 'This came from server' } });
+});
 
 app.post('/user/login', (req, res) => {
   setTimeout(
@@ -68,19 +63,25 @@ app.use((err, req, res, next) => {
   }
 });
 
-
 if (config.apiPort) {
-  const runnable = app.listen(config.apiPort, (err) => {
+  const runnable = app.listen(config.apiPort, err => {
     if (err) {
       logger.error(err);
     }
-    console.log('----\n==> SIMPLE DEBUG API is running on port %s', config.apiPort);
-    console.log('==>  Send requests to http://%s:%s', config.apiHost, config.apiPort);
+    console.log(
+      '----\n==> SIMPLE DEBUG API is running on port %s',
+      config.apiPort
+    );
+    console.log(
+      '==>  Send requests to http://%s:%s',
+      config.apiHost,
+      config.apiPort
+    );
   });
 
   io.listen(runnable);
 
-  io.on('connection', (socket) => {
+  io.on('connection', socket => {
     handleUserSocket(socket);
   });
 } else {
