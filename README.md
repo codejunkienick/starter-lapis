@@ -1,3 +1,4 @@
+[![Demo on Heroku](https://img.shields.io/badge/demo-heroku-brightgreen.svg?style=flat-square)](https://starter-lapis.herokuapp.com)
 # LAPIS
 
 Cutting edge starter kit optimized for development and production using latest tools available. 
