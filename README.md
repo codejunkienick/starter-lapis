@@ -118,7 +118,7 @@ Check bin/server.js executable and change __DISABLE_SSR__ variable.
 
 ## Installation
 ```bash
-npm install
+yarn
 ```
 
 ## Running Dev Server
