@@ -33,7 +33,7 @@
     "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
     "dev-dll": "babel-node ./node_modules/.bin/webpack --colors --progress --config webpack/dll.config.js",
     "test": "jest",
-    "heroku-postbuild": "better-npm-run build"
+    "heroku-postbuild": "better-npm-run build && npm run start"
   },
   "betterScripts": {
     "start-prod": {
