@@ -4,6 +4,7 @@ import Immutable from 'immutable';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 
+/* eslint-disable global-require */
 export default function createStore(data: Object = {}) {
   // Sync dispatched route actions to the history
   const sagaMiddleware = createSagaMiddleware();
@@ -30,8 +31,9 @@ export default function createStore(data: Object = {}) {
   const store = finalCreateStore(reducer, Immutable.fromJS(data));
 
   // Object.values(sagas).forEach(saga => sagaMiddleware.run(user));
-  sagaMiddleware.run(rootSaga).done.catch(err =>
-    console.log('[SAGA-ERROR]', err));
+  sagaMiddleware
+    .run(rootSaga)
+    .done.catch(err => console.log('[SAGA-ERROR]', err));
 
   if (__DEVELOPMENT__ && module.hot) {
     module.hot.accept('./reducers/index', () => {

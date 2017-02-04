@@ -15,7 +15,7 @@ import { SecretSpace, NotFound, About, Projects, Login } from './screens';
 type Props = {
   load: ActionCreator,
   isAuthenticated: boolean,
-}
+};
 
 function loadFonts() {
   const roboto = new FontFaceObserver('Roboto');
@@ -36,8 +36,7 @@ class App extends Component {
     this.props.load();
   }
 
-  props: Props
-
+  props: Props;
   render() {
     const { isAuthenticated } = this.props;
     return (
@@ -74,4 +73,3 @@ export default connect(
   state => ({ isAuthenticated: state.getIn(['user', 'authenticated']) }),
   { ...actions },
 )(App);
-

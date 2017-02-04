@@ -2,7 +2,9 @@ import React from 'react';
 import { Route } from 'react-router';
 import { TransitionMotion, spring } from 'react-motion';
 
-const AppearRoute = ({ component: Component, ...rest }) => {
+const AppearRoute = (
+  { component: Component, ...rest }: { component: React$Element<any> },
+) => {
   const willLeave = () => ({ opacity: spring(0) });
   const willEnter = () => ({ opacity: 0 });
 
@@ -15,7 +17,13 @@ const AppearRoute = ({ component: Component, ...rest }) => {
           willEnter={willEnter}
           styles={
             match
-              ? [{ key: location.pathname, style: { opacity: spring(1) }, data: match }]
+              ? [
+                  {
+                    key: location.pathname,
+                    style: { opacity: spring(1) },
+                    data: match,
+                  },
+                ]
               : []
           }
         >

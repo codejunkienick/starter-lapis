@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import './index.css';
+import React from 'react';
 import { NavLink } from 'core';
+import './index.css';
 
-const Header = ({}) => (
+const Header = () => (
   <div styleName="header">
     <NavLink styleName="logo" to="/">
       Starter Lapis

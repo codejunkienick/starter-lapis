@@ -9,11 +9,11 @@ const Navigation = ({ links, className }: Props) => (
   <nav className={className} styleName="navigation">
     <ul styleName="links">
       {links.map(
-        (link) => !link.hide
+        link => !link.hide
           ? <li key={link.to} styleName="link-wrap">
               <NavLink styleName="link" to={link.to}>{link.text}</NavLink>
             </li>
-          : null
+          : null,
       )}
     </ul>
   </nav>

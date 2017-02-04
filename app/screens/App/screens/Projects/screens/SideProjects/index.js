@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+// @flow
+import React from 'react';
 import { Project } from '../../shared';
 
 const projects = [
@@ -6,7 +7,7 @@ const projects = [
   { id: 2, name: 'Side B', content: 'dolor sit amet' },
 ];
 
-const SideProjects = ({}) => (
+const SideProjects = () => (
   <div>
     {projects.map(project => (
       <Project

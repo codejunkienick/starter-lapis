@@ -7,7 +7,10 @@ export default function About() {
     <div styleName="container">
       <h2 styleName="header">About</h2>
       <p>
-        Cutting edge starter kit optimized for development and production using latest tools available.{' '}
+        Cutting edge starter kit optimized for development and production using latest tools available.
+
+
+        {' '}
       </p>
       <GithubButton
         user="codejunkienick"
@@ -18,7 +21,7 @@ export default function About() {
         large
         count
         style={{
-          marginBottom: 20
+          marginBottom: 20,
         }}
       />
 
@@ -32,7 +35,7 @@ export default function About() {
         count
         style={{
           marginBottom: 20,
-          marginRight: 10
+          marginRight: 10,
         }}
       />
 
@@ -63,7 +66,7 @@ export default function About() {
           </a>
           {' '}for next generation DX (developer experience). Watch{' '}
           <a href="https://www.youtube.com/watch?v=xsSnOQynTHs">
-            Dan Abramov's talk
+            Dan Abramov&apos;s talk
           </a>
           .
         </li>
@@ -80,13 +83,15 @@ export default function About() {
         </li>
         <li>
           <a href="https://github.com/nfl/react-helmet">react-helmet</a>
-          {' '}to manage title and meta tag information on both server and client
+          {' '}
+          to manage title and meta tag information on both server and client
         </li>
         <li>
           <a href="/codejunkienick/starter-lapis/blob/master">
             babel-plugin-react-css-modules
           </a>
-          {' '}for better integration with css-modules without significant performance drop.
+          {' '}
+          for better integration with css-modules without significant performance drop.
         </li>
         <li>
           <a href="https://github.com/halt-hammerzeit/webpack-isomorphic-tools">
@@ -118,11 +123,16 @@ export default function About() {
         <li><strong>server.js</strong> entry point for server rendering.</li>
         <li>
           <strong>Html.js</strong>
-          {' '}boilerplate html for clientside rendering and serverside rendering.
+          {' '}
+          boilerplate html for clientside rendering and serverside rendering.
         </li>
         <li>
           <strong>data</strong>
-          {' '}folder is for anything related to handling api requests. index.js exports functions that return api calls wrapped in Promises. Right now{' '}
+          {' '}
+          folder is for anything related to handling api requests. index.js exports functions that return api calls wrapped in Promises. Right now
+
+
+          {' '}
           <strong>axios</strong>
           {' '}is used for api client.
         </li>
@@ -135,18 +145,21 @@ export default function About() {
           <a href="https://gist.github.com/ryanflorence/daafb1e3cb8ad740b346">
             structure proposed by ryanflorence
           </a>
-          {' '}with some modifications and it works great with react-router@v4 declarative structure.
+          {' '}
+          with some modifications and it works great with react-router@v4 declarative structure.
         </li>
         <li><strong>redux</strong> do i need to explain that to you?</li>
         <li>
           <strong>css</strong>
-          {' '}any css classes that is shared among components and can be used through CSSModules syntax (e.g. composes: a from 'css/helpers.css')
+          {' '}
+          any css classes that is shared among components and can be used through CSSModules syntax (e.g. composes: a from &apos;css/helpers.css)
         </li>
       </ul>
 
       <pre>
         <code>
-{`app
+          {
+            `app
 ├── client.js
 ├── server.js
 ├── constants.js
@@ -205,7 +218,8 @@ export default function About() {
 └── css
 ├── global.css
 ├── variables.css
-└── helpers.css`}
+└── helpers.css`
+          }
         </code>
       </pre>
     </div>

@@ -1,9 +1,8 @@
 // @flow weak
 import { takeLatest, fork } from 'redux-saga/effects';
-import { LOGIN } from '../actions/user';
-
 import { user } from 'data';
 import { callApi } from './utils';
+import { LOGIN } from '../actions/user';
 
 export function* loginAsync() {
   yield callApi({ apiFn: user.login, actionType: LOGIN });

@@ -5,14 +5,15 @@ import httpProxy from 'http-proxy';
 import path from 'path';
 import PrettyError from 'pretty-error';
 import http from 'http';
-import config from './config';
-import Html from './Html';
-import createStore from './redux/createStore';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router';
-import ServerTemplate from './ServerTemplate';
 import { Provider } from 'react-redux';
+
+import ServerTemplate from './ServerTemplate';
+import createStore from './redux/createStore';
+import Html from './Html';
+import config from './config';
 
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 const pretty = new PrettyError();
@@ -21,8 +22,10 @@ const server = new http.Server(app);
 const maxAge = 86400000 * 7; // a week
 const proxy = httpProxy.createProxyServer({
   target: targetUrl,
-  ws: true
+  ws: true,
 });
+
+pretty.start();
 
 app.use(compression());
 app.use((req, res, next) => {
@@ -69,8 +72,12 @@ app.use((req, res) => {
   const store = createStore();
 
   function hydrateOnClient() {
-    res.send('<!doctype html>\n' +
-      ReactDOMServer.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />));
+    res.send(
+      '<!doctype html>\n' +
+        ReactDOMServer.renderToString(
+          <Html assets={webpackIsomorphicTools.assets()} store={store} />,
+        ),
+    );
   }
 
   if (__DISABLE_SSR__) {
@@ -86,17 +93,17 @@ app.use((req, res) => {
       </StaticRouter>
     </Provider>
   );
-  const html = ReactDOM.renderToString(
+  const html = ReactDOMServer.renderToString(
     <Html
       assets={webpackIsomorphicTools.assets()}
       component={component}
       store={store}
-    />
+    />,
   );
 
   if (context.url) {
     res.writeHead(302, {
-      Location: context.url
+      Location: context.url,
     });
     res.end();
   } else {
@@ -105,13 +112,23 @@ app.use((req, res) => {
 });
 
 if (process.env.PORT || config.port) {
-  server.listen(process.env.PORT || config.port, (err) => {
+  server.listen(process.env.PORT || config.port, err => {
     if (err) {
       console.error(err);
     }
-    console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
-    console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
+    console.info(
+      '----\n==> ✅  %s is running, talking to API server on %s.',
+      config.app.title,
+      config.apiPort,
+    );
+    console.info(
+      '==> 💻  Open http://%s:%s in a browser to view the app.',
+      config.host,
+      config.port,
+    );
   });
 } else {
-  console.error('==>     ERROR: No PORT environment variable has been specified');
+  console.error(
+    '==>     ERROR: No PORT environment variable has been specified',
+  );
 }

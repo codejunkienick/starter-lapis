@@ -2,7 +2,7 @@
 import { fromJS } from 'immutable';
 import * as TYPES from '../actions/ui';
 
-const initialState = fromJS({ 
+const initialState = fromJS({
   displayLogin: false,
 });
 

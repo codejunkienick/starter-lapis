@@ -1,7 +1,9 @@
 { 
   "extends": [
     "eslint-config-airbnb",
-    "plugin:flowtype/recommended"
+    "plugin:flowtype/recommended",
+    "prettier",
+    "prettier/react"
   ],
   "parser": "babel-eslint",
   "env": {
@@ -10,7 +12,7 @@
     "mocha": true
   },
   "rules": {
-    "strict": 0,
+    "prettier/prettier": ["error", {"trailingComma": true, "singleQuote": true}],
     "generator-star-spacing": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-multi-comp": 0,
@@ -24,11 +26,10 @@
     "import/no-named-as-default": 2,
     "arrow-parens": 0,
     "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
-    "indent": [2, 2, {"SwitchCase": 1}],
     "no-console": 0,
     "no-alert": 0,
+    "no-children-prop": 0,
     "prefer-template": 0,
-    "max-len": [2, {"code": 150, "tabWidth": 2, "ignoreUrls": true}],
     "space-infix-ops": 0,
     "no-duplicate-imports": 0,
     "import/no-duplicates": 1,
@@ -46,6 +47,7 @@
   },
   "plugins": [
     "react", 
+  "prettier",
   "import",
   "flowtype",
   ],

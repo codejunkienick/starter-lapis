@@ -1,9 +1,13 @@
+import React from 'react';
+
 // Export collection of Routes
-// I don't really know if I want to have a centralized route config structure
 // But if you want to implement it this is an example.
 // BUT it is not used anywhere in the code
 // For a much more complete extample visit: https://github.com/ReactTraining/react-router/blob/v4/packages/react-router-website/modules/examples/RouteConfig.js
-const App = ({ children }) => <div>{children}</div>;
+const App = ({ children }: { children: React$Element<any> }) => (
+  <div>{children}</div>
+);
+
 const ROUTES = [
   {
     path: '/',

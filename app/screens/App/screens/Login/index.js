@@ -9,7 +9,7 @@ type Props = {
   displayLogin: ReduxAction,
   loading: boolean,
   isAuthenticated: boolean,
-}
+};
 
 const Login = ({ displayLogin, loading, isAuthenticated }: Props) => (
   <div styleName="container">
@@ -31,7 +31,7 @@ const Login = ({ displayLogin, loading, isAuthenticated }: Props) => (
           Login
         </button>
       </div>}
-      <LoginModal />
+    <LoginModal />
   </div>
 );
 
@@ -40,5 +40,5 @@ export default connect(
     loading: state.getIn(['user', 'loading']),
     isAuthenticated: state.getIn(['user', 'authenticated']),
   }),
-  { displayLogin: actions.displayLogin }
+  { displayLogin: actions.displayLogin },
 )(Login);

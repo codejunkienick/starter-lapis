@@ -15,7 +15,7 @@ const consoleErrorReporter = ({ error }) => {
 };
 
 consoleErrorReporter.propTypes = {
-  error: React.PropTypes.instanceOf(Error).isRequired
+  error: React.PropTypes.instanceOf(Error).isRequired,
 };
 
 const dest = document.getElementById('content');
@@ -28,7 +28,7 @@ ReactDOM.render(
   <AppContainer>
     <ClientTemplate store={store} />
   </AppContainer>,
-  dest
+  dest,
 );
 
 if (module && module.hot) {
@@ -38,11 +38,10 @@ if (module && module.hot) {
       <AppContainer errorReporter={consoleErrorReporter}>
         <NextApp store={store} />
       </AppContainer>,
-      dest
+      dest,
     );
   });
 }
-
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger

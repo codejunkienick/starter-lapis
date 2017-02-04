@@ -1,10 +1,9 @@
 // @flow
-import { createRequestTypes, createType, action } from './creators';
+import { createRequestTypes, action } from './creators';
 
 const prefix = 'user';
 
 export const LOGIN = createRequestTypes(prefix, 'LOGIN');
-
 
 const login = () => action(LOGIN.REQUEST);
 

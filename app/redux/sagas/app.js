@@ -1,5 +1,5 @@
 // @flow weak
-import { takeLatest, put, fork, call, select } from 'redux-saga/effects';
+import { takeLatest, fork } from 'redux-saga/effects';
 import { LOAD } from 'redux/actions/app';
 
 import { app } from 'data';

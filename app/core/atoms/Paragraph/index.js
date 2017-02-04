@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Paragraph = ({ children }) => (
+const Paragraph = ({ children }: { children: React$Element<any> }) => (
   <p>
     {children}
   </p>
