@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import FontFaceObserver from 'fontfaceobserver';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import config from 'config';
+import { PrivateRoute } from 'core';
 import { actions } from 'redux/actions/app';
 import './index.css';
-import { PrivateRoute } from 'core';
 import { Header, Navigation } from './components';
-import { SecretSpace, NotFound, About, Projects, Home } from './screens';
+import { SecretSpace, NotFound, About, Projects, Login } from './screens';
 
 type Props = {
   load: ActionCreator,
@@ -21,7 +21,9 @@ function loadFonts() {
   const roboto = new FontFaceObserver('Roboto');
 
   Promise.all([roboto.load()]).then(() => {
-    document.body.className += ' fonts-loaded';
+    if (document && document.body) {
+      document.body.className += ' fonts-loaded';
+    }
   });
 }
 class App extends Component {
@@ -47,17 +49,20 @@ class App extends Component {
             <Navigation
               styleName="navigation"
               links={[
-                { to: '/', text: 'Home' },
-                { to: '/about', text: 'About' },
+                { to: '/', text: 'About' },
+                { to: '/login', text: 'Login' },
                 { to: '/projects', text: 'Projects' },
                 { to: '/secret', text: 'Secret', hide: !isAuthenticated },
               ]}
             />
             <div styleName="routes">
-              <Route exact path="/" component={Home} />
-              <Route path="/about" component={About} />
-              <Route path="/projects" component={Projects} />
-              <PrivateRoute path="/secret" component={SecretSpace} />
+              <Switch>
+                <Route exact path="/" component={About} />
+                <Route path="/login" component={Login} />
+                <Route path="/projects" component={Projects} />
+                <PrivateRoute path="/secret" component={SecretSpace} />
+                <Route component={NotFound} />
+              </Switch>
             </div>
           </div>
         </div>
