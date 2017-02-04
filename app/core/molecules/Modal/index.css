@@ -1,0 +1,6 @@
+.close {
+  position: absolute;
+  right: 12px;
+  top: 11px;
+  z-index: 2;
+}
