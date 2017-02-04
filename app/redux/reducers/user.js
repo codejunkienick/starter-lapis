@@ -2,7 +2,9 @@
 import { fromJS, Map, Stack, List } from 'immutable';
 import * as TYPES from 'redux/actions/user';
 
-const initialState = fromJS({ loaded: false });
+const initialState = fromJS({
+  loaded: false,
+});
 
 export default function app(state: Object = initialState, action: Object = {}) {
   const { response = {}, error } = action;
