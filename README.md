@@ -22,6 +22,7 @@ Cutting edge starter kit optimized for development and production using latest t
 * [webpack-dashboard]() for NASA style debugging
 * [hard-source-webpack-plugin](https://github.com/mzgoddard/hard-source-webpack-plugin) to speed up initial build time
 * [axios](https://github.com/mzabriskie/axios) for handling XHR calls. 
+* [prettier](https://github.com/jlongster/prettier) for consistent code. 
 
 ## Structure
 * __client.js__ entry point for client rendering
