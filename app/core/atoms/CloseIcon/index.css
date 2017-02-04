@@ -1,0 +1,19 @@
+@svg-load close url(./close.svg) {
+    fill: #000;
+}
+
+@svg-load close-red url(./close.svg) {
+    fill: #bb0000;
+}
+
+.close-icon {
+  display: inline-block;
+  background-image: svg-inline(close);
+  height: 20px;
+  width: 20px;
+  background-repeat: no-repeat;
+  transition: background-image 0.35s ease-in-out;
+  &:hover {
+    background-image: svg-inline(close-red);
+  }
+}
