@@ -17,6 +17,7 @@ console.log(path.resolve(__dirname, '../static/dist'));
 const compiler = webpack(webpackConfig[0]);
 const serverOptions = {
   contentBase: path.resolve(__dirname, '../static'),
+  overlay: true,
   quiet: true,
   noInfo: true,
   hot: true,

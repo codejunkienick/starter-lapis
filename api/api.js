@@ -5,7 +5,6 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import SocketIo from 'socket.io';
-import multer from 'multer';
 import config from './config';
 import handleUserSocket from './ws';
 import { logger, middleware as requestMiddleware } from './helpers/logger';
@@ -24,23 +23,14 @@ app.use(
     saveUninitialized: false
   })
 );
-//app.use(httpLogger('dev'));
+
+// app.use(httpLogger('dev'));
+
 app.use(requestMiddleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/static', express.static(config.projectDir + '/public'));
-
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'static/uploads/');
-  },
-  filename: function(req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
-const upload = multer({ storage });
-const fields = [{ name: 'files', maxCount: 8 }, { name: 'file', maxCount: 1 }];
 
 app.get('/app/load', (req, res) => {
   res.json({ data: { testMsg: 'This came from server' } });

@@ -1,6 +1,5 @@
-import { camelizeKeys } from 'humps';
-import config from '../config';
 import axios from 'axios';
+import config from '../config';
 
 // TODO: ADD Normalizr: https://github.com/gaearon/normalizr
 const methods: Array<string> = ['get', 'post', 'put', 'patch', 'delete'];
