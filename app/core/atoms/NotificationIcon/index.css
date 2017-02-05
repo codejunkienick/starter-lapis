@@ -1,0 +1,21 @@
+@import 'variables';
+
+@svg-load icon url(./icon.svg) {
+    fill: #000;
+}
+@svg-load icon-hover url(./icon.svg) {
+    fill: var(--primary-color);
+}
+
+
+.icon {
+  display: inline-block;
+  background-image: svg-inline(icon);
+  height: 30px;
+  width: 30px;
+  background-repeat: no-repeat;
+  transition: background-image 0.35s ease-in-out;
+  &:hover {
+    background-image: svg-inline(icon-hover);
+  }
+}

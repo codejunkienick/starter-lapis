@@ -2,14 +2,13 @@
 @import 'variables';
 
 .wrapper {
-  margin-top: 40px;
 }
 
 .app {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 20px auto 0;
   max-width: 1000px;
 }
 

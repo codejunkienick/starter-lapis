@@ -4,17 +4,19 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import FontFaceObserver from 'fontfaceobserver';
 import { Route, Switch } from 'react-router-dom';
+import type { Stack } from 'immutable';
 
 import config from 'config';
 import { PrivateRoute } from 'core';
 import { actions } from 'redux/actions/app';
 import './index.css';
-import { Header, Navigation } from './components';
+import { Header, Navigation, NotificationBar } from './components';
 import { SecretSpace, NotFound, About, Projects, Login } from './screens';
 
 type Props = {
   load: ActionCreator,
   isAuthenticated: boolean,
+  notifications: Stack<string>,
 };
 
 function loadFonts() {
@@ -38,10 +40,11 @@ class App extends Component {
 
   props: Props;
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, notifications } = this.props;
     return (
       <div styleName="wrapper">
         <Helmet {...config.app.head} />
+        <NotificationBar notifications={notifications} />
         <div styleName="app">
           <Header />
           <div styleName="content">
@@ -70,6 +73,9 @@ class App extends Component {
   }
 }
 export default connect(
-  state => ({ isAuthenticated: state.getIn(['user', 'authenticated']) }),
+  state => ({
+    notifications: state.getIn(['app', 'notifications']),
+    isAuthenticated: state.getIn(['user', 'authenticated']),
+  }),
   { ...actions },
 )(App);

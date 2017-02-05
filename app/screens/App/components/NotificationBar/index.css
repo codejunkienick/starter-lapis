@@ -1,0 +1,13 @@
+.bar {
+  display: flex;
+  padding: 10px;
+  background: #f2f2f2;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.icon-wrap {
+  margin-right: 40px;
+  margin-left: auto;
+  justify-content: center;
+  align-items: center;
+}
