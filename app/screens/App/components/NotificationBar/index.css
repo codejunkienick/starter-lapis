@@ -31,3 +31,8 @@
     border-bottom: none;;
   }
 }
+.close-notifications {
+  display: block;
+  text-align: center;
+  padding: 4px;
+}
