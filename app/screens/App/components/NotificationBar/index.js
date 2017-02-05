@@ -22,13 +22,18 @@ const NotificationBar = (
       {isNotificationsOpen &&
         notifications.size > 0 &&
         <div styleName="notifications">
+          <span styleName="arrow-top" />
           {' '}
           {notifications.takeLast(5).reverse().map(notif => (
             <span styleName="notification">
               {notif.get('msg')}<br /><TimeAgo date={notif.get('date')} />
             </span>
           ))}
-          <button styleName="close-notifications" type="button" onClick={() => toggleNotifications()}>
+          <button
+            styleName="close-notifications"
+            type="button"
+            onClick={() => toggleNotifications()}
+          >
             Close
           </button>
         </div>}
