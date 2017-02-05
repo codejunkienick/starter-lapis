@@ -23,7 +23,7 @@ const NotificationBar = (
         notifications.size > 0 &&
         <div styleName="notifications">
           {' '}
-          {notifications.takeLast(5).map(notif => (
+          {notifications.takeLast(5).reverse().map(notif => (
             <span styleName="notification">
               {notif.get('msg')}<br /><TimeAgo date={notif.get('date')} />
             </span>

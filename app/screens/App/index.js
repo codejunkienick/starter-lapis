@@ -11,7 +11,14 @@ import { PrivateRoute } from 'core';
 import { actions } from 'redux/actions/app';
 import './index.css';
 import { Header, Navigation, NotificationBar } from './components';
-import { SecretSpace, NotFound, About, Projects, Login } from './screens';
+import {
+  SecretSpace,
+  NotificationCenter,
+  NotFound,
+  About,
+  Projects,
+  Login,
+} from './screens';
 
 type Props = {
   load: ActionCreator,
@@ -65,6 +72,7 @@ class App extends Component {
                 { to: '/', text: 'About' },
                 { to: '/login', text: 'Login' },
                 { to: '/projects', text: 'Projects' },
+                { to: '/notifications', text: 'Notification Center' },
                 { to: '/secret', text: 'Secret', hide: !isAuthenticated },
               ]}
             />
@@ -73,6 +81,7 @@ class App extends Component {
                 <Route exact path="/" component={About} />
                 <Route path="/login" component={Login} />
                 <Route path="/projects" component={Projects} />
+                <Route path="/notifications" component={NotificationCenter} />
                 <PrivateRoute path="/secret" component={SecretSpace} />
                 <Route component={NotFound} />
               </Switch>
