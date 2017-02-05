@@ -14,7 +14,7 @@ type Props = {
 const NotificationBar = (
   { notifications, isNotificationsOpen, toggleNotifications }: Props,
 ) => {
-  const unread = notifications.filter(notification => !notification.get('unread'));
+  const unread = notifications.filter(notification => notification.get('unread'));
 
   return (
     <div styleName="bar">

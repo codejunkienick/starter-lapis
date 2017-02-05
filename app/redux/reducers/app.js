@@ -65,12 +65,18 @@ export default function app(state: Object = initialState, action: Object = {}) {
         Map({
           title: payload.msg,
           datetime: Date.now(),
-          unread: false,
+          unread: true,
           id: hash(payload.msg + notifications.size),
         }),
       ));
     case TYPES.TOGGLE_NOTIFICATIONS:
       return state.updateIn(['ui', 'isNotificationsOpen'], val => !val);
+    case TYPES.READ_ALL_NOTIFICATIONS:
+      return state.update(
+        'notifications',
+        notifications =>
+          notifications.map(notification => notification.set('unread', false)),
+      );
     default:
       return state;
   }

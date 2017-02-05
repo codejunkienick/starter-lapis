@@ -9,30 +9,49 @@ type Props = {
   sendNotification: ActionCreator,
   clearNotifications: ActionCreator,
   toggleNotifications: ActionCreator,
+  readAllNotifications: ActionCreator,
   handleSubmit: any,
 };
 
 const NotificationCenter = (
-  { sendNotification, clearNotifications, toggleNotifications, handleSubmit }: Props,
+  {
+    sendNotification,
+    clearNotifications,
+    toggleNotifications,
+    readAllNotifications,
+    handleSubmit,
+  }: Props,
 ) => (
   <div styleName="container">
     <h2 styleName="header">Notification Center</h2>
-    <form
-      styleName="form"
-      onSubmit={handleSubmit(values => {
+    <form styleName="form" onSubmit={handleSubmit(values => {
         sendNotification(values.get('msg'));
-      })}
-    >
+      })}>
       <Field type="text" component="input" name="msg" />
       <button styleName="send">
         Send Notification
       </button>
     </form>
-    <button styleName="btn-wide" type="button" onClick={() => clearNotifications()}>
+    <button
+      styleName="btn-wide"
+      type="button"
+      onClick={() => clearNotifications()}
+    >
       Clear Notifications
     </button>
-    <button styleName="btn-wide" type="button" onClick={() => toggleNotifications()}>
+    <button
+      styleName="btn-wide"
+      type="button"
+      onClick={() => toggleNotifications()}
+    >
       Toggle Notifications
+    </button>
+    <button
+      styleName="btn-wide"
+      type="button"
+      onClick={() => readAllNotifications()}
+    >
+      Read All Notifications
     </button>
   </div>
 );
