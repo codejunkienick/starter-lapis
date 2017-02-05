@@ -1,29 +1,32 @@
 // @flow
 import { createRequestTypes, createType, action } from './creators';
-import { Map } from 'immutable';
 
 const prefix = 'app';
 
 export const SERVER_ERROR = createType(prefix, 'SERVER_ERROR');
-export const SERVER_REDIRECT = createType(prefix, 'SERVER_REDIRECT');
 export const CONNECTION_ERROR = createType(prefix, 'CONNECTION_ERROR');
 export const CLEAR_CONNECTION_ERROR = createType(
   prefix,
   'CLEAR_CONNECTION_ERROR',
 );
 
-export const SERVER_NOTIFICATION = createType(prefix, 'SERVER_NOTIFICATION');
-export const HIDE_NOTIFICATION = createType(prefix, 'HIDE_NOTIFICATION');
-export const SHOW_NOTIFICATION = createType(prefix, 'SHOW_NOTIFICATION');
+export const ADD_NOTIFICATION = createType(prefix, 'ADD_NOTIFICATION');
+export const CLEAR_NOTIFICATIONS = createType(prefix, 'CLEAR_NOTIFICATIONS');
+export const TOGGLE_NOTIFICATIONS = createType(prefix, 'TOGGLE_NOTIFICATIONS');
+export const SEND_NOTIFICATION = createType(prefix, 'SEND_NOTIFICATION');
 
 export const LOAD = createRequestTypes(prefix, 'LOAD');
 
-const showNotification = (message: string) =>
-  action(SHOW_NOTIFICATION, { message });
-const hideNotification = (notificationId: string) =>
-  action(HIDE_NOTIFICATION, { notificationId });
-const clearConnectionError = () => action(CLEAR_CONNECTION_ERROR);
-
 const load = () => action(LOAD.REQUEST);
+const addNotification = (msg: string) => action(ADD_NOTIFICATION, { msg });
+const clearNotifications = () => action(CLEAR_NOTIFICATIONS);
+const toggleNotifications = () => action(TOGGLE_NOTIFICATIONS);
+const sendNotification = (msg: string) => action(SEND_NOTIFICATION, { msg });
 
-export const actions = { load };
+export const actions = {
+  load,
+  addNotification,
+  clearNotifications,
+  toggleNotifications,
+  sendNotification,
+};

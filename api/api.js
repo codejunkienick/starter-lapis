@@ -12,6 +12,7 @@ import { logger, middleware as requestMiddleware } from './helpers/logger';
 const app = express();
 const server = new http.Server(app);
 const io = new SocketIo(server);
+io.path('/ws');
 
 app.use(cookieParser(config.secret));
 app.use(
@@ -23,6 +24,7 @@ app.use(
     saveUninitialized: false
   })
 );
+
 
 // app.use(httpLogger('dev'));
 
@@ -72,6 +74,7 @@ if (config.apiPort) {
   io.listen(runnable);
 
   io.on('connection', socket => {
+    console.log('user connected');
     handleUserSocket(socket);
   });
 } else {

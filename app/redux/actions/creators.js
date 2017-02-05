@@ -18,5 +18,5 @@ export function createRequestTypes(reducer: string, base: string): AsyncAction {
 }
 
 export function action(type: string, payload: Object = {}): Object {
-  return { type, ...payload };
+  return { type, payload };
 }
