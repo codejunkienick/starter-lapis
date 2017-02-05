@@ -113,6 +113,7 @@
     "node-object-hash": "^1.1.5",
     "nodemon": "^1.10.2",
     "normalize.css": "^5.0.0",
+    "object-hash": "^1.1.5",
     "postcss-inline-svg": "^2.3.0",
     "pretty-error": "^2.0.1",
     "react": "^15.4.2",

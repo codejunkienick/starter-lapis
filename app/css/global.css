@@ -104,6 +104,20 @@ pre {
   word-wrap: normal;
 }
 
+input {
+  position: relative;
+  padding: 6px 11px 5px;
+  line-height: 1.57;
+  border-radius: 3px;
+  position: relative;
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  &:focus {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+}
 
 
 [role="button"],

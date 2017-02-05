@@ -3,4 +3,31 @@
 } 
 .container {
 
+  input {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+.btn {
+  padding: 6px;
+  background: #f8f8f8;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.send {
+  margin-left: 8px;
+  composes: btn;
+}
+
+.form {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.btn-wide {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  margin-bottom: 20px;
+  composes: btn;
 }

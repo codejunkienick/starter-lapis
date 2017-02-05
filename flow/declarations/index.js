@@ -25,5 +25,10 @@ declare type ReduxAction = { type: string; payload: Object };
 
 declare type ActionCreator = (...args: any) => ReduxAction;
 
-declare type Notification = Map<string, { msg: string, date: number }>
+type Notification = Map<string, {
+  id: string | number,
+  title: string,
+  datetime: number,
+  unread: boolean,
+}>;
 
