@@ -97,19 +97,24 @@ app
     └── helpers.css
 
 ```
-
-## TODO
+## Done
+- [x] Transitions between routes
+- [x] Rewrite production config in ES6
 - [x] Basic route configuration
 - [x] Client side rendering
 - [x] Server-side rendering
-- [ ] Code splitting with System.import()
-- [x] Transitions between routes
-- [x] Rewrite production config in ES6
-- [ ] Integrate happypack
+- [x] Fix most of linting errors
+- [x] Add basic auth example with api and react-router
+- [x] Integrate redux-saga with websockets
+- [x] Integrate with Flow
+- [x] Integrate with Prettier
 - [x] Integrate jest for testing
-- [ ] Add basic auth example with api and react-router
+
+
+## TODO
+- [ ] Code splitting with System.import()
+- [ ] Integrate happypack
 - [ ] Write test examples
-- [ ] Integrate with Flow
 
 ## How to?
 
