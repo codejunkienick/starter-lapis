@@ -5,14 +5,26 @@ import type { Stack } from 'immutable';
 import './index.css';
 
 type Props = {
-  notifications: Stack<string>,
+  notifications: Stack<Notification>,
+  toggleNotifications: ActionCreator,
+  isNotificationsOpen: boolean,
 };
 
-const NotificationBar = ({ notifications }: Props) => (
+const NotificationBar = (
+  { notifications, isNotificationsOpen, toggleNotifications }: Props,
+) => (
   <div styleName="bar">
-    {notifications.map(msg => <span>{msg}</span>)}
     <div styleName="icon-wrap">
-      <NotificationIcon />
+      <button type="button" onClick={() => toggleNotifications()}>
+        <NotificationIcon />
+      </button>
+      {isNotificationsOpen &&
+        <div styleName="notifications">
+          {' '}
+          {notifications
+            .takeLast(5)
+            .map(notif => <span styleName="notification">{notif.get('msg')}</span>)}
+        </div>}
     </div>
   </div>
 );

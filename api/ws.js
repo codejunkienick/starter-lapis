@@ -3,9 +3,8 @@ import { logger } from './helpers/logger';
 
 function generateMsgEvery20Sec(socket) {
   return function loop() {
-    socket.emit('notifications.sendOne', {
-      msg: loremIpsum({ count: 4, units: 'words' }),
-    });
+    const msg = loremIpsum({ count: 4, units: 'words' });
+    socket.emit('notifications.sendOne', { msg });
     setTimeout(loop, 1000 * 20);
   };
 }
@@ -13,7 +12,9 @@ function generateMsgEvery20Sec(socket) {
 export default function handleUserSocket(socket) {
   try {
     socket.on('notifications.sendOne', data => {
-      socket.emit('notifications.sendOne', { msg: data.msg });
+      if (data.msg) {
+        socket.emit('notifications.sendOne', { msg: data.msg });
+      }
     });
 
     generateMsgEvery20Sec(socket)();

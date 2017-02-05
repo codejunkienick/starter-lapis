@@ -16,7 +16,9 @@ import { SecretSpace, NotFound, About, Projects, Login } from './screens';
 type Props = {
   load: ActionCreator,
   isAuthenticated: boolean,
-  notifications: Stack<string>,
+  notifications: Stack<Notification>,
+  isNotificationsOpen: boolean,
+  toggleNotifications: ActionCreator,
 };
 
 function loadFonts() {
@@ -40,11 +42,20 @@ class App extends Component {
 
   props: Props;
   render() {
-    const { isAuthenticated, notifications } = this.props;
+    const {
+      isAuthenticated,
+      isNotificationsOpen,
+      toggleNotifications,
+      notifications,
+    } = this.props;
     return (
       <div styleName="wrapper">
         <Helmet {...config.app.head} />
-        <NotificationBar notifications={notifications} />
+        <NotificationBar
+          notifications={notifications}
+          isNotificationsOpen={isNotificationsOpen}
+          toggleNotifications={toggleNotifications}
+        />
         <div styleName="app">
           <Header />
           <div styleName="content">
@@ -75,6 +86,7 @@ class App extends Component {
 export default connect(
   state => ({
     notifications: state.getIn(['app', 'notifications']),
+    isNotificationsOpen: state.getIn(['app', 'ui', 'isNotificationsOpen']),
     isAuthenticated: state.getIn(['user', 'authenticated']),
   }),
   { ...actions },

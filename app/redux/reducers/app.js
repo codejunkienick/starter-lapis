@@ -8,7 +8,7 @@ const initialState = Map({
 });
 
 export default function app(state: Object = initialState, action: Object = {}) {
-  const { response = {} } = action;
+  const { response = {}, payload = {} } = action;
   switch (action.type) {
     case TYPES.LOAD.SUCCESS:
       return state.merge(response);
@@ -16,7 +16,7 @@ export default function app(state: Object = initialState, action: Object = {}) {
       return state.set('notifications', Stack());
     case TYPES.ADD_NOTIFICATION:
       return state.update('notifications', notifications =>
-        notifications.push(action.msg));
+        notifications.push(Map({ msg: payload.msg, date: Date.now() })));
     case TYPES.TOGGLE_NOTIFICATIONS:
       return state.updateIn(['ui', 'isNotificationsOpen'], val => !val);
     default:

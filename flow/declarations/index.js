@@ -1,7 +1,10 @@
-declare var __DEVELOPMENT__: bool;
-declare var __CLIENT__: bool;
-declare var __DEVTOOLS__: bool;
-declare var __SERVER__: bool;
+// @flow
+import type { Map } from 'immutable';
+
+declare var __DEVELOPMENT__: boolean;
+declare var __CLIENT__: boolean;
+declare var __DEVTOOLS__: boolean;
+declare var __SERVER__: boolean;
 
 declare type AsyncAction = {
   REQUEST: string,
@@ -19,5 +22,8 @@ declare module CSSModule {
 }
 
 declare type ReduxAction = { type: string; payload: Object };
+
 declare type ActionCreator = (...args: any) => ReduxAction;
+
+declare type Notification = Map<string, { msg: string, date: number }>
 
