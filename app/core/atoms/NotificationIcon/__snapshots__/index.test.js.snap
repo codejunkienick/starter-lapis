@@ -1,0 +1,4 @@
+exports[`test NotificationIcon 1`] = `
+<span
+  styleName="icon" />
+`;

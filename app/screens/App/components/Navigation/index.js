@@ -11,7 +11,7 @@ const Navigation = ({ links, className }: Props) => (
       {links.map(
         link => !link.hide
           ? <li key={link.to} styleName="link-wrap">
-              <NavLink styleName="link" to={link.to}>{link.text}</NavLink>
+              <NavLink strict styleName="link" to={link.to}>{link.text}</NavLink>
             </li>
           : null,
       )}
