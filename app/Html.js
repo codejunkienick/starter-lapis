@@ -69,9 +69,9 @@ const Html = ({ assets, component, store }: Props) => {
           charSet="UTF-8"
         />
         <script src={assets.javascript.main} defer="true" charSet="UTF-8" />
-        {global.__DEVELOPMENT__ &&
+        {__DEVELOPMENT__ &&
           <script src={assets.javascript.vendor} charSet="UTF-8" />}
-        {global.__DEVELOPMENT__ &&
+        {__DEVELOPMENT__ &&
           <script src="http://localhost:3001/dist/app.js" charSet="UTF-8" />}
       </body>
     </html>

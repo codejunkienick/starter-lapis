@@ -26,9 +26,8 @@
     "import/no-named-as-default": 2,
     "arrow-parens": 0,
     "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
-    "no-console": 0,
-    "no-alert": 0,
     "no-children-prop": 0,
+    "no-confusing-arrow": 0,
     "prefer-template": 0,
     "space-infix-ops": 0,
     "no-duplicate-imports": 0,
