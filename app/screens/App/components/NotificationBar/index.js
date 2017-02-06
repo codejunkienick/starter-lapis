@@ -1,12 +1,12 @@
 // @flow
 import React from 'react';
 import TimeAgo from 'react-timeago';
+import { Stack } from 'immutable';
 import { NotificationIcon } from 'core';
-import type { Stack } from 'immutable';
 import './index.css';
 
 type Props = {
-  notifications: Stack<Notification>,
+  notifications: Stack<?Notification>,
   toggleNotifications: ActionCreator,
   isNotificationsOpen: boolean,
 };
@@ -14,8 +14,8 @@ type Props = {
 const NotificationBar = (
   { notifications, isNotificationsOpen, toggleNotifications }: Props,
 ) => {
-  const unread = notifications.filter(notification => notification.get('unread'));
-
+  const unread = notifications.filter(notification =>
+    notification.get('unread'));
   return (
     <div styleName="bar">
       <div styleName="icon-wrap">
@@ -48,6 +48,10 @@ const NotificationBar = (
       </div>
     </div>
   );
+};
+
+NotificationBar.defaultProps = {
+  notifications: Stack(),
 };
 
 export default NotificationBar;

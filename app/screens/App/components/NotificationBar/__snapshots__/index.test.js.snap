@@ -1,0 +1,33 @@
+exports[`test NotificationBar 1`] = `
+<div
+  styleName="bar">
+  <div
+    styleName="icon-wrap">
+    <button
+      onClick={[Function]}
+      type="button">
+      <span
+        styleName="icon" />
+    </button>
+  </div>
+</div>
+`;
+
+exports[`test NotificationBar 2`] = `
+<div
+  styleName="bar">
+  <div
+    styleName="icon-wrap">
+    <button
+      onClick={[Function]}
+      type="button">
+      <span
+        styleName="icon" />
+    </button>
+    <span
+      styleName="counter">
+      3
+    </span>
+  </div>
+</div>
+`;

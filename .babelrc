@@ -2,11 +2,14 @@
   "presets": ["es2015", "react", "stage-0"],
 
   "plugins": [
-    "syntax-flow",
-    "transform-flow-strip-types",
-    "add-module-exports",
-    "system-import-transformer",
-    "transform-decorators-legacy",
-    "transform-react-display-name"
+    ["module-resolver", {
+      "root": ["./app"]
+    }],
+  "syntax-flow",
+  "transform-flow-strip-types",
+  "add-module-exports",
+  "system-import-transformer",
+  "transform-decorators-legacy",
+  "transform-react-display-name"
   ]
 }

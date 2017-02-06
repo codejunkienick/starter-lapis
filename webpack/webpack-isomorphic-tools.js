@@ -11,7 +11,6 @@ module.exports = {
   // Sending SIGTERM to other processes..
   //
   // debug: true,
-  patch_require: true,
   assets: {
     images: {
       extensions: [

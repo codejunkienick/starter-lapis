@@ -54,7 +54,7 @@
   "settings": {
     "import/parser": "babel-eslint",
     "import/resolve": {
-      "moduleDirectory": ["node_modules", "app"]
+      "babel-module": {}
     },
     "flowtype": {
       "onlyFilesWithFlowAnnotation": false
