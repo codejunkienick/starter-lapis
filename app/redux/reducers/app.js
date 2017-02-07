@@ -3,6 +3,15 @@ import { Map, Stack, fromJS } from 'immutable';
 import hash from 'object-hash';
 import * as TYPES from '../actions/app';
 
+// type AppAction =
+//   | { type: 'app/ADD_NOTIFICATION', payload: { msg: string } }
+//   | { type: 'app/LOAD_REQUEST', payload: {} }
+//   | { type: 'app/LOAD_SUCCESS', payload: {} }
+//   | { type: 'app/CLEAR_NOTIFICATIONS', payload: {} }
+//   | { type: 'app/TOGGLE_NOTIFICATIONS', payload: {} }
+//   | { type: 'app/SEND_NOTIFICATION', payload: { msg: string } }
+//   | { type: 'app/READ_ALL_NOTIFICATIONS', payload: {} };
+
 const initialState = Map({
   ui: Map(),
   notifications: Stack(
@@ -53,20 +62,19 @@ const initialState = Map({
   ).reverse(),
 });
 
-export default function app(state: Object = initialState, action: Object = {}) {
-  const { response = {}, payload = {} } = action;
+export default function app(state: Object = initialState, action: ReduxAction) {
   switch (action.type) {
     case TYPES.LOAD.SUCCESS:
-      return state.merge(response);
+      return state.merge(action.payload);
     case TYPES.CLEAR_NOTIFICATIONS:
       return state.set('notifications', Stack());
     case TYPES.ADD_NOTIFICATION:
       return state.update('notifications', notifications => notifications.push(
         Map({
-          title: payload.msg,
+          title: action.payload.msg,
           datetime: Date.now(),
           unread: true,
-          id: hash(payload.msg + notifications.size),
+          id: hash(action.payload.msg + notifications.size),
         }),
       ));
     case TYPES.TOGGLE_NOTIFICATIONS:

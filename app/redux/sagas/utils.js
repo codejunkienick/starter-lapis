@@ -7,7 +7,7 @@ export function* callApi({ apiFn, actionData, actionType }) {
   try {
     const { data, error } = yield call(apiFn, actionData);
     if (data && actionType.SUCCESS) {
-      yield put({ type: actionType.SUCCESS, response: fromJS(data) });
+      yield put({ type: actionType.SUCCESS, payload: fromJS(data) });
     } else if (actionType.FAILURE) {
       yield put({ type: actionType.FAILURE, error });
     }

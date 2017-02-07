@@ -6,7 +6,7 @@ const initialState = fromJS({
   loaded: false,
 });
 
-export default function app(state: Object = initialState, action: Object = {}) {
+export default function app(state: Object = initialState, action: ReduxAction) {
   switch (action.type) {
     case TYPES.LOGIN.REQUEST:
       return state.set('loading', true);

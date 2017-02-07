@@ -3,6 +3,7 @@
 .*node_modules/systemjs-builder/test/fixtures/sourcemaps-expectations/.*
 .*/node_modules/.*/test/.*
 .*/node_modules/flow-runtime/.*
+.*/node_modules/react-timeago/lib/.*.flow
 .*/node_modules/babel-plugin-flow-runtime/.*
 
 [libs]
