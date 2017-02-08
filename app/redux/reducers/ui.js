@@ -9,7 +9,7 @@ const initialState = fromJS({
 export default function app(state: Object = initialState, action: Object = {}) {
   switch (action.type) {
     case TYPES.DISPLAY_LOGIN:
-      return state.set('displayLogin', action.display);
+      return state.set('displayLogin', action.payload.display);
 
     default:
       return state;
