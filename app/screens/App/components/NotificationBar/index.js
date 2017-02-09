@@ -12,12 +12,20 @@ type Props = {
 };
 
 const NotificationBar = (
-  { notifications, isNotificationsOpen, toggleNotifications }: Props,
+  {
+    notifications,
+    isNotificationsOpen,
+    toggleNotifications,
+    onBurgerClick,
+  }: Props,
 ) => {
   const unread = notifications.filter(notification =>
     notification.get('unread'));
   return (
     <div styleName="bar">
+      <button onClick={onBurgerClick} styleName="burger" type="button">
+        Menu
+      </button>
       <div styleName="icon-wrap">
         <button type="button" onClick={() => toggleNotifications()}>
           <NotificationIcon />

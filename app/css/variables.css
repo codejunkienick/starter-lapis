@@ -15,8 +15,8 @@
   --container-sm: calc(var(--sm-min) + var(--gutter-width));
   --container-md: calc(var(--md-min) + var(--gutter-width));
   --container-lg: calc(var(--lg-min) + var(--gutter-width));
-  --body-font-family: Verdana, sans-serif;
-  --body-font-family-loaded: 'Roboto', Verdana, sans-serif;
+  --body-font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
+  --body-font-family-loaded:"Helvetica Neue", "Calibri Light", Roboto, sans-serif;
   --link-color: #211b82;
   --link-hover-color: #392db3;
   --primary-color: #26619c;

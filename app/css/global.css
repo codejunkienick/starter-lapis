@@ -4,7 +4,6 @@
  */
 @import 'normalize.css';
 @import 'variables';
-@import url(https://fonts.googleapis.com/css?family=Roboto:400&subset=latin,cyrillic);
 
 *, *:before, *:after {
   box-sizing: inherit;

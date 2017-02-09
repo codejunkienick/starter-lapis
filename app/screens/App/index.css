@@ -10,6 +10,11 @@
   flex-direction: column;
   margin: 20px auto 0;
   max-width: 1000px;
+  padding: 0 1rem;
+}
+
+.link {
+  margin-bottom: 16px;
 }
 
 .content {
@@ -21,12 +26,17 @@
 }
 
 .navigation {
+  display: none;
   flex: 120px;
   flex-shrink: 0;
+  margin-right: 20px;
 }
 
 .connection-error {
 }
 
 @media (--md-viewport) {
+  .navigation {
+    display: flex;
+  }
 }

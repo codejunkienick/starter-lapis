@@ -7,10 +7,10 @@
 
 .logo {
   display: inline-block;
-  padding: 24px 60px;
+  padding: 16px 36px;
   background: var(--lapis-color);
   color: #fff !important;
-  font-size: 56px;
+  font-size: 32px;
   font-weight: bold;
   font-style: italic;
   transition: background .35s var(--easing-swift-out);
@@ -19,4 +19,9 @@
     background: color(var(--lapis-color) tint(10%));
     transition: background .35s var(--easing-swift-in);
   }
+}
+
+@media (--md-viewport) {
+  font-size: 56px;
+  padding: 24px 60px;
 }
