@@ -6,6 +6,9 @@ import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HappyPack from 'happypack';
+
+const happyThreadPool = HappyPack.ThreadPool({ size: 4 });
 
 const nodeModules = {};
 fs.readdirSync(path.resolve(__dirname, '../node_modules'))
@@ -87,10 +90,13 @@ const config = server => ({
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: [ 'babel-loader?' + JSON.stringify(babelLoaderQuery) ]
+        loaders: ['happypack/loader?id=ctmJSX']
       },
       { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.css$/, loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[path]___[local]___[hash:base64:5]!postcss-loader' },
+      {
+        test: /\.css$/, 
+        loaders: ['happypack/loader?id=ctmCSS']
+      },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader?limit=10000&mimetype=application/font-woff'
@@ -119,7 +125,30 @@ const config = server => ({
       chunkModules: true,
       exclude: [/node_modules/]
     }),
-
+    new HappyPack({
+      cache: true,
+      cacheContext: {
+        env: process.env.NODE_ENV
+      },
+      id: 'ctmJSX',
+      threadPool: happyThreadPool,
+      loaders: [{
+        loader: 'babel-loader',
+        query: babelLoaderQuery
+      }]
+    }),
+    new HappyPack({
+      cache: true,
+      cacheContext: {
+        env: process.env.NODE_ENV
+      },
+      id: 'ctmCSS',
+      threadPool: happyThreadPool,
+      loaders: [
+        'style-loader',
+        'css-loader?modules&importLoaders=1&localIdentName=[path]___[local]___[hash:base64:5]',
+        'postcss-loader']
+    }),
     new webpack.LoaderOptionsPlugin({
       options: {
         context  : context,

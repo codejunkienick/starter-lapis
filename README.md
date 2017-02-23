@@ -109,11 +109,11 @@ app
 - [x] Integrate with Flow
 - [x] Integrate with Prettier
 - [x] Integrate jest for testing
+- [x] Integrate happypack
 
 
 ## TODO
 - [ ] Code splitting with System.import()
-- [ ] Integrate happypack
 - [ ] Write test examples
 
 ## How to?

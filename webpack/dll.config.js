@@ -5,6 +5,9 @@ import postcss from './postcss-config.js';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 import WebpackIsomorphicToolsConfig from './webpack-isomorphic-tools.js';
+import HappyPack from 'happypack';
+
+const happyThreadPool = HappyPack.ThreadPool({ size: 4 });
 
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(WebpackIsomorphicToolsConfig);
 
@@ -90,9 +93,16 @@ export default {
           'html-loader?exportAsEs6Default'
         ]
       },
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel-loader?' + JSON.stringify(babelLoaderQuery)]},
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loaders: ['happypack/loader?id=ctmJSX']
+      },
       { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.css$/, loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[path]___[local]___[hash:base64:5]!postcss-loader' },
+      {
+        test: /\.css$/, 
+        loaders: ['happypack/loader?id=ctmCSS']
+      },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
@@ -129,6 +139,30 @@ export default {
           });
         });
       },
+    }),
+    new HappyPack({
+      cache: true,
+      cacheContext: {
+        env: process.env.NODE_ENV
+      },
+      id: 'ctmJSX',
+      threadPool: happyThreadPool,
+      loaders: [{
+        loader: 'babel-loader',
+        query: babelLoaderQuery
+      }]
+    }),
+    new HappyPack({
+      cache: true,
+      cacheContext: {
+        env: process.env.NODE_ENV
+      },
+      id: 'ctmCSS',
+      threadPool: happyThreadPool,
+      loaders: [
+        'style-loader',
+        'css-loader?modules&importLoaders=1&localIdentName=[path]___[local]___[hash:base64:5]',
+        'postcss-loader']
     }),
     new webpack.LoaderOptionsPlugin({
       options: {

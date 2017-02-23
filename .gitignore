@@ -2,6 +2,7 @@
 node_modules/
 *.iml
 *.log
+.happypack
 webpack-assets.json
 webpack-stats.json
 npm-debug.log
