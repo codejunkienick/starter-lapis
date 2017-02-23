@@ -35,20 +35,20 @@
     "flowtype/define-flow-type": 1,
     "flowtype/space-before-type-colon": [
       1,
-    "never"
+      "never"
     ],
     "flowtype/use-flow-type": 1,
     "flowtype/valid-syntax": 1,
     "flowtype/type-id-match": [
       2,
-    "^([A-Z]+[a-z0-9A-Z]*)$"
+      "^([A-Z]+[a-z0-9A-Z]*)$"
     ]
   },
   "plugins": [
     "react", 
-  "prettier",
-  "import",
-  "flowtype",
+    "prettier",
+    "import",
+    "flowtype"
   ],
   "settings": {
     "import/parser": "babel-eslint",
