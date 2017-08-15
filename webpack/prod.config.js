@@ -2,7 +2,6 @@ require('babel-polyfill');
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
-import postcss from './postcss-config.js';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -30,114 +29,89 @@ try {
 }
 
 babelLoaderQuery.plugins = [
-		[
-			"react-css-modules",
-			{
-        context,
-        webpackHotModuleReloading: false,
-				"generateScopedName": "[hash:base64]"
-			}
-		],
+  [
+    'react-css-modules',
+    {
+      context,
+      webpackHotModuleReloading: false,
+      generateScopedName: '[hash:base64]'
+    }
+  ],
   ...babelLoaderQuery.plugins
 ];
 
 export default {
   context,
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   entry: { main: ['./app/client.js'] },
   output: {
     path: assetsPath,
     filename: '[name]-[chunkhash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: '/dist/'
+    publicPath: '/'
   },
   module: {
-    loaders: [
-      { test: /\.html$/, loaders: ['html-loader'] },
+    rules: [
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader:
+          'url-loader?limit=10000&mimetype=image/svg+xml!image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: [strip.loader('debug'), 'babel-loader?' + JSON.stringify(babelLoaderQuery)]
+        use: [
+          {
+            loader: 'babel-loader',
+            options: JSON.stringify(babelLoaderQuery)
+          }
+        ]
       },
-      { test: /\.json$/, loader: 'json-loader' },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?modules&importLoaders=1!postcss-loader'
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+                importLoaders: 1,
+                modules: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: {
+                  path: path.resolve(__dirname, './postcss.config.js')
+                }
+              }
+            }
+          ]
+          // publicPath: "/assets" // Overrides output.publicPath
         })
-      },
-      {
-        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-      },
-      {
-        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-      },
-      {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
-      },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml!image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
       }
     ]
   },
   resolve: {
-    modules: ['app', 'node_modules'],
-    extensions: ['*', '.json', '.js', '.jsx']
+    modules: ['src', 'node_modules'],
+    extensions: ['*', '.json', '.js', '.jsx'],
+    alias: {
+      react: path.resolve(__dirname, '../node_modules/react'),
+      'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
+    }
   },
   plugins: [
     new HardSourceWebpackPlugin({
-      // Either an absolute path or relative to output.path.
-      cacheDirectory: path.resolve(
-        __dirname,
-        'hard-source-cache/prod/[confighash]'
-      ),
-      recordsPath: path.resolve(
-        __dirname,
-        'hard-source-cache/prod/[confighash]/records.json'
-      ),
-      configHash: function(webpackConfig) {
-        // Build a string value used by HardSource to determine which cache to
-        // use if [confighash] is in cacheDirectory or if the cache should be
-        // replaced if [confighash] does not appear in cacheDirectory.
-        //
-        // node-object-hash on npm can be used to build this.
-        return require('node-object-hash')().hash(webpackConfig);
-      },
-      // Optional field. This field determines when to throw away the whole
-      // cache if for example npm modules were updated.
-      environmentHash: {
-        root: process.cwd(),
-        directories: ['node_modules'],
-        files: ['package.json']
-      },
-      // `environmentHash` can also be a function. that can return a function
-      // resolving to a hashed value of the dependency environment.
-      environmentHash: function() {
-        // Return a string or a promise resolving to a string of a hash of the
-        return new Promise(function(resolve, reject) {
-          require(
-            'fs'
-          ).readFile(__dirname + '/../yarn.lock', function(err, src) {
-            if (err) {
-              return reject(err);
-            }
-            resolve(
-              require('crypto').createHash('md5').update(src).digest('hex')
-            );
-          });
-        });
-      }
+      cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/hard-source/prod/[confighash]'),
+      recordsPath: path.resolve(__dirname, '../node_modules/.cache/hard-source/prod/[confighash]/records.json'),
+      configHash: require('node-object-hash')({ sort: false }).hash
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
-      options: { context, postcss: postcss() }
+      options: { context }
     }),
     new CleanPlugin([assetsPath], { root: projectRootPath }),
     new ExtractTextPlugin({
@@ -153,13 +127,20 @@ export default {
       __DEVTOOLS__: false
     }),
     // ignore dev config
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
     new webpack.ProvidePlugin({ React: 'react' }),
     // optimizations
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      parallel: {
+        cache: true,
+        workers: 2
+      }
+    }),
     new HtmlWebpackPlugin({
-      inject: 'head',
+      inject: 'body',
       favicon: path.resolve(__dirname, '..', 'static', 'favicon.ico'),
       filename: 'index.html',
       template: path.resolve(__dirname, '..', 'static', 'template.html'),

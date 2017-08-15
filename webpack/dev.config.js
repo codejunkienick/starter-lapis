@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
-import postcss from './postcss-config.js';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import StatsPlugin from 'stats-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HappyPack from 'happypack';
+import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
 
 const happyThreadPool = HappyPack.ThreadPool({ size: 4 });
 
@@ -59,11 +59,11 @@ const entryPoint = server =>
 
 
 const config = server => ({
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-module-inline-source-map',
   context: context,
   cache: true,
   performance: { hints: false },
-  
+
   ...entryPoint(server),
 
   output: {
@@ -82,37 +82,98 @@ const config = server => ({
   ...(server ? {target: 'node'} : {}),
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.html$/,
-        loaders: [ 'html-loader?exportAsEs6Default' ]
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              exportAsEs6Default: true
+            }
+          }
+        ]
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['happypack/loader?id=ctmJSX']
+        use: [
+          {
+            loader: 'happypack/loader',
+            options: {
+              id: 'ctmJSX'
+            }
+          }
+        ]
       },
-      { test: /\.json$/, loader: 'json-loader' },
       {
-        test: /\.css$/, 
-        loaders: ['happypack/loader?id=ctmCSS']
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'happypack/loader',
+            options: {
+              id: 'ctmCSS'
+            }
+          }
+        ]
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/font-woff'
+            }
+          }
+        ]
       },
       {
         test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/font-woff'
+            }
+          }
+        ]
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/octet-stream'
+            }
+          }
+        ]
       },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
       {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              mimetype: 'application/file-loader'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              mimetype: 'application/svg+xml'
+            }
+          }
+        ]
       }
     ]
   },
@@ -125,35 +186,42 @@ const config = server => ({
       chunkModules: true,
       exclude: [/node_modules/]
     }),
-    new HappyPack({
-      cache: true,
-      cacheContext: {
-        env: process.env.NODE_ENV
-      },
-      id: 'ctmJSX',
-      threadPool: happyThreadPool,
-      loaders: [{
-        loader: 'babel-loader',
-        query: babelLoaderQuery
-      }]
+    new webpack.NamedModulesPlugin(),
+    new HardSourceWebpackPlugin({
+      cacheDirectory: path.resolve(__dirname, '../node_modules/.cache/hard-source/dev/[confighash]'),
+      recordsPath: path.resolve(__dirname, '../node_modules/.cache/hard-source/dev/[confighash]/records.json'),
+      configHash: require('node-object-hash')({ sort: false }).hash
     }),
     new HappyPack({
-      cache: true,
-      cacheContext: {
-        env: process.env.NODE_ENV
-      },
+      id: 'ctmJSX',
+      threadPool: happyThreadPool,
+      loaders: [
+        {
+          loader: 'babel-loader',
+          query: babelLoaderQuery
+        }
+      ]
+    }),
+    new HappyPack({
       id: 'ctmCSS',
       threadPool: happyThreadPool,
       loaders: [
         'style-loader',
         'css-loader?modules&importLoaders=1&localIdentName=[path]___[local]___[hash:base64:5]',
-        'postcss-loader']
+        {
+          loader: 'postcss-loader',
+          query: {
+            config: {
+              path: path.resolve(__dirname, './postcss.config.js')
+            }
+          }
+        }
+      ]
     }),
     new webpack.LoaderOptionsPlugin({
       options: {
-        context  : context,
-        postcss: postcss(),
-      },
+        context: context,
+      }
     }),
     new webpack.ProvidePlugin({ React: 'react' }),
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -163,13 +231,14 @@ const config = server => ({
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new DuplicatePackageCheckerPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
     new webpack.DefinePlugin({
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,
       __DEVTOOLS__: true
-    }),
+    })
 
   ]
 });

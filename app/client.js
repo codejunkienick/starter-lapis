@@ -9,20 +9,8 @@ import Redbox from 'redbox-react';
 import ClientTemplate from './ClientTemplate';
 import createStore from './redux/createStore';
 
-const consoleErrorReporter = ({ error }) => {
-  console.error(error);
-  return <Redbox error={error} />;
-};
-
-consoleErrorReporter.propTypes = {
-  error: React.PropTypes.instanceOf(Error).isRequired,
-};
-
 const dest = document.getElementById('content');
 const store = createStore(window.reduxState);
-
-// Remove redbox
-delete AppContainer.prototype.unstable_handleError; // FIXME;
 
 ReactDOM.render(
   <AppContainer>
@@ -35,7 +23,7 @@ if (module && module.hot) {
   module.hot.accept('./ClientTemplate', () => {
     const NextApp = require('./ClientTemplate.js');
     ReactDOM.render(
-      <AppContainer errorReporter={consoleErrorReporter}>
+      <AppContainer>
         <NextApp store={store} />
       </AppContainer>,
       dest,

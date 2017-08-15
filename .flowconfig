@@ -11,6 +11,8 @@ flow/declarations/
 flow-typed/npm/
 
 [options]
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=src
 sharedmemory.hash_table_pow=19
 module.name_mapper='^core\(.*\)$' -> '<PROJECT_ROOT>/app/core/\1'
 module.name_mapper='^config\(.*\)$' -> '<PROJECT_ROOT>/app/config/\1'
@@ -21,7 +23,6 @@ module.name_mapper='^redux\(.*\)$' -> '<PROJECT_ROOT>/app/redux/\1'
 module.name_mapper='^constants.js$' -> '<PROJECT_ROOT>/app/constants.js'
 module.name_mapper='.*\(.css\)' -> 'CSSModule'
 module.name_mapper='.*\.\(svg\|png\|jpg\|gif\)$' -> '<PROJECT_ROOT>/flow/stub/url-loader.js'
-strip_root=true
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
 

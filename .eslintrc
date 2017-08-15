@@ -6,16 +6,25 @@
     "prettier/react"
   ],
   "parser": "babel-eslint",
+  "parserOptions":{
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
   "rules": {
-    "prettier/prettier": ["error", {"trailingComma": true, "singleQuote": true}],
+   "jsx-a11y/img-has-alt": 0,
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
+    "prettier/prettier": ["error", {"singleQuote": true}],
     "generator-star-spacing": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/no-multi-comp": 0,
+    "react/no-multi-comp": [1, { "ignoreStateless": true }],
+    "react/no-children-prop": 0,
     "import/default": 0,
     "import/named": 0,
     "import/namespace": 0,
@@ -24,11 +33,17 @@
     "import/imports-first": 0,
     "import/no-unresolved": 0,
     "import/no-named-as-default": 2,
+    "react/no-unused-prop-types": 0,
+    "react/jsx-boolean-value": [2, "always"],
+    "flowtype/generic-spacing": 0,
     "arrow-parens": 0,
     "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
     "no-children-prop": 0,
     "no-confusing-arrow": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "arrow-body-style": 0,
     "prefer-template": 0,
+    "no-alert": 0,
     "space-infix-ops": 0,
     "no-duplicate-imports": 0,
     "import/no-duplicates": 1,
@@ -48,7 +63,7 @@
     "react", 
     "prettier",
     "import",
-    "flowtype"
+    "flowtype",
   ],
   "settings": {
     "import/parser": "babel-eslint",

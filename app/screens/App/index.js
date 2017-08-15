@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import FontFaceObserver from 'fontfaceobserver';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import type { Stack } from 'immutable';
 import { slide as MenuSlide } from 'react-burger-menu';
 
@@ -155,11 +155,11 @@ class App extends Component {
     );
   }
 }
-export default connect(
+export default withRouter(connect(
   state => ({
     notifications: state.getIn(['app', 'notifications']),
     isNotificationsOpen: state.getIn(['app', 'ui', 'isNotificationsOpen']),
     isAuthenticated: state.getIn(['user', 'authenticated']),
   }),
   { ...actions },
-)(App);
+)(App));
