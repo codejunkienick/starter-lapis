@@ -8,12 +8,9 @@ function formatUrl(path: string, external: boolean) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
   if (__SERVER__) {
     // Prepend host and port of the API server to the path.
-    return 'http://' +
-      config.apiHost +
-      ':' +
-      config.apiPort +
-      adjustedPath +
-      '/';
+    return (
+      'http://' + config.apiHost + ':' + config.apiPort + adjustedPath + '/'
+    );
   }
   // Prepend `/api` to relative URL, to proxy to API server.
   return '/api' + adjustedPath + '/';
@@ -25,7 +22,7 @@ class ApiClient {
       this[method] = (
         path: string,
         { params, data, headers } = {},
-        external: boolean = false,
+        external: boolean = false
       ) =>
         new Promise(async (resolve, reject) => {
           const url = formatUrl(path, external);

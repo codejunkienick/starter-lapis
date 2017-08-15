@@ -8,20 +8,14 @@ import './index.css';
 type Props = {
   displayLogin: ReduxAction,
   loading: boolean,
-  isAuthenticated: boolean,
+  isAuthenticated: boolean
 };
 
-const Login = ({ displayLogin, loading, isAuthenticated }: Props) => (
+const Login = ({ displayLogin, loading, isAuthenticated }: Props) =>
   <div styleName="container">
     <h2 styleName="header">Login Screen</h2>
-    {loading &&
-      <div>
-        Loading...
-      </div>}
-    {isAuthenticated &&
-      <div>
-        You are now logged in!
-      </div>}
+    {loading && <div>Loading...</div>}
+    {isAuthenticated && <div>You are now logged in!</div>}
     {!isAuthenticated &&
       !loading &&
       <div>
@@ -32,13 +26,12 @@ const Login = ({ displayLogin, loading, isAuthenticated }: Props) => (
         </button>
       </div>}
     <LoginModal />
-  </div>
-);
+  </div>;
 
 export default connect(
   state => ({
     loading: state.getIn(['user', 'loading']),
-    isAuthenticated: state.getIn(['user', 'authenticated']),
+    isAuthenticated: state.getIn(['user', 'authenticated'])
   }),
-  { displayLogin: actions.displayLogin },
+  { displayLogin: actions.displayLogin }
 )(Login);

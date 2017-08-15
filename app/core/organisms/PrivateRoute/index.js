@@ -4,23 +4,22 @@ import { connect } from 'react-redux';
 
 type Props = {
   component: React$Element,
-  isAuthenticated: boolean,
+  isAuthenticated: boolean
 };
 
 type RouteProps = {
-  location: any,
+  location: any
 };
 
-const PrivateRoute = ({ component, isAuthenticated, ...rest }: Props) => (
+const PrivateRoute = ({ component, isAuthenticated, ...rest }: Props) =>
   <Route
     {...rest}
     render={(props: RouteProps) =>
       isAuthenticated
         ? React.createElement(component, props)
         : <Redirect to={{ pathname: '/', state: { from: props.location } }} />}
-  />
-);
+  />;
 
 export default connect(state => ({
-  isAuthenticated: state.getIn(['user', 'authenticated']),
+  isAuthenticated: state.getIn(['user', 'authenticated'])
 }))(PrivateRoute);

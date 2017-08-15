@@ -1,9 +1,8 @@
 import React from 'react';
 
-const Paragraph = ({ children }: { children: React$Element<any> }) => (
+const Paragraph = ({ children }: { children: React$Element<any> }) =>
   <p>
     {children}
-  </p>
-);
+  </p>;
 
 export default Paragraph;

@@ -9,14 +9,17 @@ type Props = {
   handleSubmit: any,
   login: ActionCreator,
   isLoginOpen: boolean,
-  displayLoginModal: ActionCreator,
+  displayLoginModal: ActionCreator
 };
 
 const formName = 'loginForm';
 
-const LoginModal = (
-  { handleSubmit, login, isLoginOpen, displayLoginModal }: Props,
-) => (
+const LoginModal = ({
+  handleSubmit,
+  login,
+  isLoginOpen,
+  displayLoginModal
+}: Props) =>
   <Modal
     contentLabel="Login Screen"
     onRequestClose={() => displayLoginModal(false)}
@@ -30,19 +33,16 @@ const LoginModal = (
     >
       <Field component="input" name="login" />
       <br />
-      <button>
-        Login
-      </button>
+      <button>Login</button>
     </Form>
-  </Modal>
-);
+  </Modal>;
 
 export default connect(
   state => ({
     isLoginOpen: state.getIn(['ui', 'displayLogin']),
-    isLoading: state.getIn(['user', 'loading']),
+    isLoading: state.getIn(['user', 'loading'])
   }),
   { displayLoginModal: actions.displayLogin, login: userActions.login },
   null,
-  { pure: true },
+  { pure: true }
 )(reduxForm({ form: formName, pure: true })(LoginModal));

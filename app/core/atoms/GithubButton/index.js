@@ -8,7 +8,7 @@ type Props = {
   width: number,
   height: number,
   count: boolean,
-  large: boolean,
+  large: boolean
 };
 
 const GithubButton = (props: Props) => {

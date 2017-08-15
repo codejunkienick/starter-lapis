@@ -7,7 +7,7 @@ export const SERVER_ERROR = createType(prefix, 'SERVER_ERROR');
 export const CONNECTION_ERROR = createType(prefix, 'CONNECTION_ERROR');
 export const CLEAR_CONNECTION_ERROR = createType(
   prefix,
-  'CLEAR_CONNECTION_ERROR',
+  'CLEAR_CONNECTION_ERROR'
 );
 
 export const ADD_NOTIFICATION = createType(prefix, 'ADD_NOTIFICATION');
@@ -16,7 +16,7 @@ export const TOGGLE_NOTIFICATIONS = createType(prefix, 'TOGGLE_NOTIFICATIONS');
 export const SEND_NOTIFICATION = createType(prefix, 'SEND_NOTIFICATION');
 export const READ_ALL_NOTIFICATIONS = createType(
   prefix,
-  'READ_ALL_NOTIFICATIONS',
+  'READ_ALL_NOTIFICATIONS'
 );
 
 export const LOAD = createRequestTypes(prefix, 'LOAD');
@@ -34,5 +34,5 @@ export const actions = {
   clearNotifications,
   toggleNotifications,
   sendNotification,
-  readAllNotifications,
+  readAllNotifications
 };

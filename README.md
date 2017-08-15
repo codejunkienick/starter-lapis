@@ -2,11 +2,12 @@
 # LAPIS
 
 Cutting edge starter kit optimized for development and production using latest tools available. 
+It features optimized for rapid development config powered by happypack and various settings I've found to be optimal.
 
 ## Features
-* [React](https://github.com/facebook/react)
+* [React@v16-beta.05](https://github.com/facebook/react)
 * [React Router@v4](https://github.com/ReactTraining/react-router/tree/v4) beta version
-* [Webpack@2.2](http://webpack.github.io) for bundling
+* [Webpack@3.5](http://webpack.github.io) for bundling
 * [Express](http://expressjs.com)
 * [Babel](http://babeljs.io) for ES6 and ES7 magic
 * [Immutable.js](https://facebook.github.io/immutable-js) for enforcing immutable redux store and functional programming
@@ -97,20 +98,6 @@ app
     └── helpers.css
 
 ```
-## Done
-- [x] Transitions between routes
-- [x] Rewrite production config in ES6
-- [x] Basic route configuration
-- [x] Client side rendering
-- [x] Server-side rendering
-- [x] Fix most of linting errors
-- [x] Add basic auth example with api and react-router
-- [x] Integrate redux-saga with websockets
-- [x] Integrate with Flow
-- [x] Integrate with Prettier
-- [x] Integrate jest for testing
-- [x] Integrate happypack
-
 
 ## TODO
 - [ ] Code splitting with System.import()

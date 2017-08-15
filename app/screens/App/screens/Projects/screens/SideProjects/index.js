@@ -4,19 +4,18 @@ import { Project } from '../../shared';
 
 const projects = [
   { id: 1, name: 'Side A', content: 'lorem ipsum' },
-  { id: 2, name: 'Side B', content: 'dolor sit amet' },
+  { id: 2, name: 'Side B', content: 'dolor sit amet' }
 ];
 
-const SideProjects = () => (
+const SideProjects = () =>
   <div>
-    {projects.map(project => (
+    {projects.map(project =>
       <Project
         title={project.name}
         content={project.content}
         key={project.id}
       />
-    ))}
-  </div>
-);
+    )}
+  </div>;
 
 export default SideProjects;

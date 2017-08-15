@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 import * as TYPES from '../actions/ui';
 
 const initialState = fromJS({
-  displayLogin: false,
+  displayLogin: false
 });
 
 export default function app(state: Object = initialState, action: Object = {}) {

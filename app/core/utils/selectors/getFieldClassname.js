@@ -4,7 +4,7 @@ export default function getFieldClass(
   classNames: InputClassNames,
   error,
   touched,
-  disabled,
+  disabled
 ): string {
   if (error && touched && classNames.error) return classNames.error;
   if (disabled && classNames.disabled) return classNames.disabled;

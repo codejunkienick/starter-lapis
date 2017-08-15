@@ -10,27 +10,26 @@ type Props = {
   clearNotifications: ActionCreator,
   toggleNotifications: ActionCreator,
   readAllNotifications: ActionCreator,
-  handleSubmit: any,
+  handleSubmit: any
 };
 
-const NotificationCenter = (
-  {
-    sendNotification,
-    clearNotifications,
-    toggleNotifications,
-    readAllNotifications,
-    handleSubmit,
-  }: Props,
-) => (
+const NotificationCenter = ({
+  sendNotification,
+  clearNotifications,
+  toggleNotifications,
+  readAllNotifications,
+  handleSubmit
+}: Props) =>
   <div styleName="container">
     <h2 styleName="header">Notification Center</h2>
-    <form styleName="form" onSubmit={handleSubmit(values => {
+    <form
+      styleName="form"
+      onSubmit={handleSubmit(values => {
         sendNotification(values.get('msg'));
-      })}>
+      })}
+    >
       <Field type="text" component="input" name="msg" />
-      <button styleName="send">
-        Send Notification
-      </button>
+      <button styleName="send">Send Notification</button>
     </form>
     <button
       styleName="btn-wide"
@@ -53,9 +52,8 @@ const NotificationCenter = (
     >
       Read All Notifications
     </button>
-  </div>
-);
+  </div>;
 
 export default connect(null, { ...actions })(
-  reduxForm({ form: 'notifications' })(NotificationCenter),
+  reduxForm({ form: 'notifications' })(NotificationCenter)
 );

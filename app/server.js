@@ -22,7 +22,7 @@ const server = new http.Server(app);
 const maxAge = 86400000 * 7; // a week
 const proxy = httpProxy.createProxyServer({
   target: targetUrl,
-  ws: true,
+  ws: true
 });
 
 pretty.start();
@@ -75,8 +75,8 @@ app.use((req, res) => {
     res.send(
       '<!doctype html>\n' +
         ReactDOMServer.renderToString(
-          <Html assets={webpackIsomorphicTools.assets()} store={store} />,
-        ),
+          <Html assets={webpackIsomorphicTools.assets()} store={store} />
+        )
     );
   }
 
@@ -98,12 +98,12 @@ app.use((req, res) => {
       assets={webpackIsomorphicTools.assets()}
       component={component}
       store={store}
-    />,
+    />
   );
 
   if (context.url) {
     res.writeHead(302, {
-      Location: context.url,
+      Location: context.url
     });
     res.end();
   } else {
@@ -119,16 +119,16 @@ if (process.env.PORT || config.port) {
     console.info(
       '----\n==> ✅  %s is running, talking to API server on %s.',
       config.app.title,
-      config.apiPort,
+      config.apiPort
     );
     console.info(
       '==> 💻  Open http://%s:%s in a browser to view the app.',
       config.host,
-      config.port,
+      config.port
     );
   });
 } else {
   console.error(
-    '==>     ERROR: No PORT environment variable has been specified',
+    '==>     ERROR: No PORT environment variable has been specified'
   );
 }

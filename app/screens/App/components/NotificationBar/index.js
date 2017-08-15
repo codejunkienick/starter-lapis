@@ -8,19 +8,18 @@ import './index.css';
 type Props = {
   notifications: Stack<?Notification>,
   toggleNotifications: ActionCreator,
-  isNotificationsOpen: boolean,
+  isNotificationsOpen: boolean
 };
 
-const NotificationBar = (
-  {
-    notifications,
-    isNotificationsOpen,
-    toggleNotifications,
-    onBurgerClick,
-  }: Props,
-) => {
+const NotificationBar = ({
+  notifications,
+  isNotificationsOpen,
+  toggleNotifications,
+  onBurgerClick
+}: Props) => {
   const unread = notifications.filter(notification =>
-    notification.get('unread'));
+    notification.get('unread')
+  );
   return (
     <div styleName="bar">
       <button onClick={onBurgerClick} styleName="burger" type="button">
@@ -36,15 +35,14 @@ const NotificationBar = (
           </span>}
         {isNotificationsOpen &&
           <div styleName="notifications">
-            <span styleName="arrow-top" />
-            {' '}
-            {notifications.takeLast(5).reverse().map(notif => (
+            <span styleName="arrow-top" />{' '}
+            {notifications.takeLast(5).reverse().map(notif =>
               <span key={notif.get('id')} styleName="notification">
                 {notif.get('title')}
                 <br />
                 <TimeAgo date={notif.get('datetime')} />
               </span>
-            ))}
+            )}
             <button
               styleName="close-notifications"
               type="button"
@@ -59,7 +57,7 @@ const NotificationBar = (
 };
 
 NotificationBar.defaultProps = {
-  notifications: Stack(),
+  notifications: Stack()
 };
 
 export default NotificationBar;

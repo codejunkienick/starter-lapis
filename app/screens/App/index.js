@@ -18,7 +18,7 @@ import {
   NotFound,
   About,
   Projects,
-  Login,
+  Login
 } from './screens';
 
 type Props = {
@@ -26,7 +26,7 @@ type Props = {
   isAuthenticated: boolean,
   notifications: Stack<Notification>,
   isNotificationsOpen: boolean,
-  toggleNotifications: ActionCreator,
+  toggleNotifications: ActionCreator
 };
 
 const slideMenuStyles = {
@@ -36,35 +36,35 @@ const slideMenuStyles = {
     width: '36px',
     height: '30px',
     left: '36px',
-    top: '36px',
+    top: '36px'
   },
   bmBurgerBars: {
     display: 'none',
     position: 'fixed',
-    background: '#373a47',
+    background: '#373a47'
   },
   bmCrossButton: {
     height: '24px',
-    width: '24px',
+    width: '24px'
   },
   bmCross: {
-    background: '#666',
+    background: '#666'
   },
   bmMenu: {
     background: '#f1f1f1',
     padding: '2.5em 0.75em 0 1.5em',
-    fontSize: '1.15em',
+    fontSize: '1.15em'
   },
   bmMorphShape: {
-    fill: '#373a47',
+    fill: '#373a47'
   },
   bmItemList: {
     color: '#b8b7ad',
-    padding: '0.8em',
+    padding: '0.8em'
   },
   bmOverlay: {
-    background: 'rgba(0, 0, 0, 0.3)',
-  },
+    background: 'rgba(0, 0, 0, 0.3)'
+  }
 };
 
 function loadFonts() {
@@ -81,7 +81,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isMenuOpen: false,
+      isMenuOpen: false
     };
   }
   componentWillMount() {
@@ -97,7 +97,7 @@ class App extends Component {
 
   toggleMenu = () => {
     this.setState(prevState => ({
-      isMenuOpen: !prevState.isMenuOpen,
+      isMenuOpen: !prevState.isMenuOpen
     }));
   };
   render() {
@@ -105,14 +105,14 @@ class App extends Component {
       isAuthenticated,
       isNotificationsOpen,
       toggleNotifications,
-      notifications,
+      notifications
     } = this.props;
     const links = [
       { to: '/', text: 'About' },
       { to: '/login', text: 'Login' },
       { to: '/projects', text: 'Projects' },
       { to: '/notifications', text: 'Notification Center' },
-      { to: '/secret', text: 'Secret', hide: !isAuthenticated },
+      { to: '/secret', text: 'Secret', hide: !isAuthenticated }
     ];
     return (
       <div styleName="wrapper">
@@ -120,13 +120,21 @@ class App extends Component {
         <MenuSlide
           width={240}
           styles={slideMenuStyles}
-          isOpen={this.state.isMenuOpen}>
+          isOpen={this.state.isMenuOpen}
+        >
           {links.map(
-            link => !link.hide
-              ? <li styleName="link" key={link.to}>
-                <NavLink onClick={this.toggleMenu} strict to={link.to}>{link.text}</NavLink>
-                </li>
-              : null,
+            link =>
+              !link.hide
+                ? <li styleName="link" key={link.to}>
+                    <NavLink
+                      onClick={this.toggleMenu}
+                      strict={true}
+                      to={link.to}
+                    >
+                      {link.text}
+                    </NavLink>
+                  </li>
+                : null
           )}
         </MenuSlide>
         <NotificationBar
@@ -141,7 +149,7 @@ class App extends Component {
             <Navigation styleName="navigation" links={links} />
             <div styleName="routes">
               <Switch>
-                <Route exact path="/" component={About} />
+                <Route exact={true} path="/" component={About} />
                 <Route path="/login" component={Login} />
                 <Route path="/projects" component={Projects} />
                 <Route path="/notifications" component={NotificationCenter} />
@@ -155,11 +163,13 @@ class App extends Component {
     );
   }
 }
-export default withRouter(connect(
-  state => ({
-    notifications: state.getIn(['app', 'notifications']),
-    isNotificationsOpen: state.getIn(['app', 'ui', 'isNotificationsOpen']),
-    isAuthenticated: state.getIn(['user', 'authenticated']),
-  }),
-  { ...actions },
-)(App));
+export default withRouter(
+  connect(
+    state => ({
+      notifications: state.getIn(['app', 'notifications']),
+      isNotificationsOpen: state.getIn(['app', 'ui', 'isNotificationsOpen']),
+      isAuthenticated: state.getIn(['user', 'authenticated'])
+    }),
+    { ...actions }
+  )(App)
+);

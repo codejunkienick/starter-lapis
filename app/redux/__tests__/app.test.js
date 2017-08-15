@@ -5,7 +5,7 @@ import {
   ADD_NOTIFICATION,
   TOGGLE_NOTIFICATIONS,
   READ_ALL_NOTIFICATIONS,
-  SEND_NOTIFICATION,
+  SEND_NOTIFICATION
 } from '../actions/app';
 import reducer from '../reducers/app';
 
@@ -13,7 +13,7 @@ describe('Notifications actions', () => {
   it('should dispatch an action to clear notifications', () => {
     const expectedAction = {
       type: CLEAR_NOTIFICATIONS,
-      payload: {},
+      payload: {}
     };
     expect(actions.clearNotifications()).toEqual(expectedAction);
   });
@@ -22,8 +22,8 @@ describe('Notifications actions', () => {
     const expectedAction = {
       type: ADD_NOTIFICATION,
       payload: {
-        msg: 'test',
-      },
+        msg: 'test'
+      }
     };
     expect(actions.addNotification('test')).toEqual(expectedAction);
   });
@@ -31,7 +31,7 @@ describe('Notifications actions', () => {
   it('should dispatch an action to toggle notifications', () => {
     const expectedAction = {
       type: TOGGLE_NOTIFICATIONS,
-      payload: {},
+      payload: {}
     };
     expect(actions.toggleNotifications()).toEqual(expectedAction);
   });
@@ -40,8 +40,8 @@ describe('Notifications actions', () => {
     const expectedAction = {
       type: SEND_NOTIFICATION,
       payload: {
-        msg: 'test',
-      },
+        msg: 'test'
+      }
     };
     expect(actions.sendNotification('test')).toEqual(expectedAction);
   });
@@ -49,7 +49,7 @@ describe('Notifications actions', () => {
   it('should dispatch an action to read all notifications', () => {
     const expectedAction = {
       type: READ_ALL_NOTIFICATIONS,
-      payload: {},
+      payload: {}
     };
     expect(actions.readAllNotifications()).toEqual(expectedAction);
   });
@@ -61,32 +61,32 @@ describe('Notifications reducer', () => {
       id: 12,
       title: 'Test test test 12',
       unread: false,
-      datetime: new Date().setDate(new Date().getDate() - 8),
+      datetime: new Date().setDate(new Date().getDate() - 8)
     },
     {
       id: 11,
       title: 'Test test test 11',
       unread: false,
-      datetime: new Date().setDate(new Date().getDate() - 31),
+      datetime: new Date().setDate(new Date().getDate() - 31)
     },
     {
       id: 10,
       title: 'Test test test 10',
       unread: false,
-      datetime: new Date().setDate(new Date().getDate() - 160),
-    },
+      datetime: new Date().setDate(new Date().getDate() - 160)
+    }
   ]);
 
   it('should handle CLEAR_NOTIFICATIONS', () => {
     expect(
       reducer(
         fromJS({
-          notifications: Stack(sampleNofitications),
+          notifications: Stack(sampleNofitications)
         }),
         {
-          type: CLEAR_NOTIFICATIONS,
-        },
-      ),
+          type: CLEAR_NOTIFICATIONS
+        }
+      )
     ).toEqual(fromJS({ notifications: Stack() }));
   });
 
@@ -95,15 +95,15 @@ describe('Notifications reducer', () => {
       reducer(
         fromJS({
           notifications: Stack(sampleNofitications),
-          ui: Map(),
+          ui: Map()
         }),
-        actions.toggleNotifications(),
-      ),
+        actions.toggleNotifications()
+      )
     ).toEqual(
       fromJS({
         notifications: Stack(sampleNofitications),
-        ui: Map({ isNotificationsOpen: true }),
-      }),
+        ui: Map({ isNotificationsOpen: true })
+      })
     );
   });
 
@@ -112,15 +112,15 @@ describe('Notifications reducer', () => {
       reducer(
         fromJS({
           notifications: Stack(sampleNofitications),
-          ui: Map({ isNotificationsOpen: true }),
+          ui: Map({ isNotificationsOpen: true })
         }),
-        actions.toggleNotifications(),
-      ),
+        actions.toggleNotifications()
+      )
     ).toEqual(
       fromJS({
         notifications: Stack(sampleNofitications),
-        ui: Map({ isNotificationsOpen: false }),
-      }),
+        ui: Map({ isNotificationsOpen: false })
+      })
     );
   });
   // TODO: handle

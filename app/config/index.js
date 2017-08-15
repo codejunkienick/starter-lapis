@@ -1,9 +1,9 @@
 require('babel-polyfill');
 
-const environment = ({
+const environment = {
   development: { isProduction: false },
-  production: { isProduction: true },
-})[process.env.NODE_ENV || 'development'];
+  production: { isProduction: true }
+}[process.env.NODE_ENV || 'development'];
 
 module.exports = Object.assign(
   {
@@ -26,10 +26,10 @@ module.exports = Object.assign(
           { property: 'og:description', content: '' },
           { property: 'og:card', content: 'summary' },
           { property: 'og:image:width', content: '500' },
-          { property: 'og:image:height', content: '500' },
-        ],
-      },
-    },
+          { property: 'og:image:height', content: '500' }
+        ]
+      }
+    }
   },
-  environment,
+  environment
 );

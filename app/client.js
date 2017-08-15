@@ -16,7 +16,7 @@ ReactDOM.render(
   <AppContainer>
     <ClientTemplate store={store} />
   </AppContainer>,
-  dest,
+  dest
 );
 
 if (module && module.hot) {
@@ -26,7 +26,7 @@ if (module && module.hot) {
       <AppContainer>
         <NextApp store={store} />
       </AppContainer>,
-      dest,
+      dest
     );
   });
 }
